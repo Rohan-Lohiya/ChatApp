@@ -1,0 +1,39 @@
+.homeContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    background-color: var(--absoutebackground);
+    color: var(--basicfontcolor);
+    font-family: sans-serif;
+  }
+  
+  .card {
+    background-color: var(--chatsectionbackground);
+    padding: 2rem 3rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    text-align: center;
+  }
+  
+  .card:hover {
+    background-color: var(--chatsectionbackgroundhover);
+    transform: scale(1.02);
+  }
+  
+  .title {
+    color: var(--headingfontcolor);
+    font-size: 2rem;
+    margin: 0;
+  }
+  
+  .description {
+    color: var(--basicfontcolorlight);
+    font-size: 1rem;
+    margin-top: 0.5rem;
+  }
+  

@@ -1,0 +1,494 @@
+.selectedchatinfocont{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--background);
+    overflow-y: auto;
+    position: static;
+}
+.whitescreen {
+  height: 100vh;
+  width: 100vw;
+  background-color: var(--whitescreen);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.showwhite {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.hidewhite {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.addedmemberscont{
+  position: absolute;
+  width: 400px;
+  height: 500px;
+  opacity: 0;
+  pointer-events: none;
+  box-shadow: var(--shadow);
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+.showaddmem{
+  transform: scale(1);
+  opacity: 1;
+  pointer-events: auto;
+}
+.hideaddmem{
+  transform: scale(0.8);
+  opacity: 0;
+  pointer-events: none;
+}
+.heading{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 20px;
+    box-sizing: border-box;
+    padding: 20px;
+    height: 60px;
+    background-color: var(--chatsectionbackground);
+    margin-bottom: 20px;
+    position: sticky;
+    top: 0; /* This is required for sticky positioning */
+    z-index: 10; 
+}
+.heading h3{
+    margin: 0px;
+    font-size: medium;
+    cursor: default;
+}
+.heading img{
+    margin: 0px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+.selectedimage{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    width: 150px;
+}
+.selectedimage img{
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    background-color: var(--chatitembackcolorhover);
+}
+.selectedimage h3{
+    margin: 0px;
+    margin-top: 10px;
+    font-size: medium;
+    cursor: default;
+}
+.aboutsectioncont{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    box-sizing: border-box;
+    padding: 10px 20px;
+    background-color: var(--chatsectionbackground);
+    margin-top: 10px;
+}
+.aboutsectioncont h4{
+    margin: 0px;
+    color: var(--chatdatecolor);
+    font-size: small;
+}
+.editdesccont{
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  width: 100%;
+}
+.editdesccont img{
+  cursor: pointer;
+}
+.editdesctextarea {
+  border: none;
+  outline: none;
+  background-color: var(--chatsectionbackground);
+  font-size: large;
+  height: 24px;
+  min-height: 24px; /* Set a minimum height */
+  resize: none; /* Prevent manual resizing */
+  overflow-y: hidden; /* Hide scrollbar */
+}
+/* For automatic height adjustment */
+.editdesctextarea {
+  display: block;
+  width: 90%;
+  box-sizing: border-box;
+}
+.editdesctextarea:focus{
+  border-bottom: 1px solid var(--headingfontcolor);
+}
+
+.deletechatcont {
+  background-color: var(--background);
+  border: 1px solid var(--headingfontcolor);
+  color: var(--headingfontcolor);
+  height: 30px;
+  border-radius: 10px;
+  transition: all 0.1s ease-in-out;
+  width: 94%;
+  padding: 10px 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.deletechatcont:hover {
+  background-color: var(--headingfontcolor);
+  color: var(--background);
+  cursor: pointer;
+}
+
+.deletechatcont:active {
+  background-color: var(--background);
+  color: var(--headingfontcolor);
+  cursor: pointer;
+}
+.memberscont{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-top: 10px;
+    background-color: var(--chatsectionbackground);
+    padding: 10px 0px;
+    box-sizing: border-box;
+}
+.memberscont h5{
+    width: 100%;
+    margin: 0px;
+    box-sizing: border-box;
+    padding: 0px 20px;
+    color: var(--chatdatecolor);
+    font-size: small;
+}
+.searchmemberinputcont {
+  width: 95%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  margin-top: 20px;
+}
+
+.searchinput {
+  width: 85%;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  height: 30px;
+  background-color: var(--chatselectedbackcolor);
+  padding-left: 10px;
+  padding-right: 10px;
+  border-bottom-right-radius: 0px;
+  border-top-right-radius: 0px;
+}
+
+.closeimagecont {
+  background-color: var(--chatselectedbackcolor);
+  height: 30px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom-right-radius: 10px;
+  border-top-right-radius: 10px;
+  padding-right: 5px;
+}
+
+.show {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+}
+
+.hide {
+  opacity: 0;
+  transform: scale(0.8);
+  pointer-events: none;
+}
+
+.closeimagecont img {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+.peoplelistcont {
+  background-color: var(--chatsectionbackground);
+  width: 95%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid var(--linebreakbackcolorlight);
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+.peoplelist {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding-left: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  box-sizing: border-box;
+}
+
+.peoplelistimage {
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+}
+
+.peoplelistinfocont{
+    width: calc(100% - 50px);
+}
+.peoplelistnamecont{
+    display: flex;
+    justify-content: space-between;
+    padding-right: 20px;
+    box-sizing: border-box;
+    align-items: center;
+}
+.checkadmin{
+    background-color: var(--background);
+    padding: 5px;
+    border: 1px solid var(--headingfontcolor);
+    border-radius: 10px;
+    font-size: small;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.peoplelistname {
+  color: var(--basicfontcolorlight);
+
+}
+.aboutcont{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 35px;
+  box-sizing: border-box;
+    position: relative;
+}
+.peoplelistabout{
+    font-size: small;
+    color: var(--chatdatecolor);
+}
+.aboutcont img{
+  height: 15px;
+  width: 15px;
+  filter: contrast(0.1);
+  transform: rotate(90deg);
+  cursor: pointer;
+}
+.searchresultcont {
+  background-color: var(--chatsectionbackground);
+  width: 95%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid var(--linebreakbackcolorlight);
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+.searchresult {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding-left: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  box-sizing: border-box;
+}
+
+.searchresult:hover {
+  background-color: var(--chatitembackcolorhover);
+  cursor: pointer;
+}
+
+.searchresultimage {
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+}
+
+.nosearchresult {
+  color: var(--basicfontcolorlight);
+  margin: 20px;
+}
+.addmembercont{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  padding-left: 20px;
+  gap: 10px;
+  box-sizing: border-box;  
+  margin-top: 10px;
+  color: var(--basicfontcolorlight);
+  font-size: medium;
+}
+.addmembercont:hover{
+  cursor: pointer;
+  background-color: var(--chatitembackcolorhover);
+}
+.addmembercont img{
+  height: 25px;
+  width: 25px;
+  border: 1px solid var(--headingfontcolor);
+  background-color: var(--background);
+  border-radius: 50%;
+  padding: 5px;
+}
+.memberoptions{
+  position: absolute;
+  z-index: 100;
+  top: 15px;
+  right: 50px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  background-color: var(--chatbackgroundcolor);
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  padding: 10px 0px;
+  box-sizing: border-box;
+  box-shadow: var(--shadow);
+  
+}
+.showoption {
+  transform: scale(1);
+  opacity: 1;
+  transform-origin: top right;
+  pointer-events: auto; /* Allow interaction */
+}
+
+.hideoption {
+  transform: scale(0.8);
+  opacity: 0;
+  transform-origin: top right;
+  pointer-events: none; /* Disable interaction */
+}
+
+.memberoptions div{
+  padding: 10px;
+  box-sizing: border-box;
+  color: var(--basicfontcolorlight);
+  font-size: small;
+}
+.memberoptions div:hover{
+  background-color: var(--chatselectedbackcolor);
+  cursor: pointer;
+}
+
+.leavegrouppromtcont{
+  position: absolute;
+  width: 400px;
+  opacity: 0;
+  pointer-events: none;
+  box-shadow: var(--shadow);
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  background-color: var(--background);
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.showleavegroup{
+  transform: scale(1);
+  opacity: 1;
+  pointer-events: auto;
+}
+.hideleavegroup{
+  transform: scale(0.8);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.leavegrouppromtcont h2{
+  text-align: left;
+    display: flex;
+    align-items: center;
+    margin: 0px;
+    color: var(--basicfontcolorlight);
+    font-weight: 400;
+}
+
+.leavegrouppromtcont h5{
+    text-align: left;
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+    color: var(--basicfontcolorlight);
+    font-weight: 400;
+}
+
+.leaveoptioncont {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    height: 100%;
+    gap: 20px;
+    width: 100%;
+}
+
+.leaveoptioncancel {
+    color: var(--headingfontcolor);
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: 1px solid rgb(211, 211, 211);
+    transition: box-shadow 0.3s ease-in-out;
+    box-shadow: 0px 0px 0px 0px #0000002e;
+}
+
+.leaveoptioncancel:hover {
+    box-shadow: 0px 2px 6px 0px #0000002e;
+    cursor: pointer;
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.leaveoptionleave {
+    color: white;
+    padding: 10px 20px;
+    border-radius: 20px;
+    background-color: var(--headingfontcolor);
+    transition: background-color 0.3s ease-in-out;
+}
+
+.leaveoptionleave:hover {
+    background-color: var(--headingfontcolor);
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}

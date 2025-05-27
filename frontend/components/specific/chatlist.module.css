@@ -1,0 +1,57 @@
+.chatContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--background);
+  }
+  
+  .chatItem {
+    width: 100%;
+    display: flex;
+    gap: 20px;
+    padding: 10px;
+    cursor: pointer;
+    position: relative;
+  }
+  .linebreak{
+    width: 80%;
+    position: absolute;
+    bottom: -10px;
+    left: 0px;
+    outline: none;
+    justify-self: anchor-center;
+    border: none;
+    height: 1px;
+    background-color: var(--linebreakbackcolorlight);
+  }
+  .isselected {
+    background-color: var(--chatselectedbackcolor);
+  }
+  .chatItem:hover {
+    background-color: var(--chatitembackcolorhover);
+  }
+  
+  
+  
+  .avatar img {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+  }
+  
+  .chatInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .friendName {
+    font-weight:400;
+    color: var(--basicfontcolorlight);
+  }
+  
+  .newMessages {
+    font-size: 12px;
+    color: var(--basicfontcolorlight);
+  }
+  

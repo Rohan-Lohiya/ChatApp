@@ -1,0 +1,79 @@
+.addchatcont{
+    height: auto;
+    background-color: var(--chatsectionbackground);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    padding: 20px;
+    box-shadow: var(--shadow);
+    border-radius: 5px;
+    align-items: center;
+
+}
+.addchatcont h2{
+    margin: 0px;
+    text-align: center;
+}
+.inputcont{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    gap: 10px;
+}
+.addchatcont div input{
+    border: none;
+    outline: none;
+    height: 30px;
+    border-radius: 10px;
+    padding-left: 10px;
+    background-color: var(--chatselectedbackcolor);
+    width: 70%;
+}
+.refreshbtn{
+    width: 30%;
+    background-color: var(--background);
+    border: 1px solid var(--headingfontcolor);
+    color: var(--headingfontcolor);
+    height: 30px;
+    border-radius: 10px;
+    transition: all 0.1s ease-in-out;
+}
+.refreshbtn:hover{
+    background-color: var(--headingfontcolor);
+    color: var(--background);
+    cursor: pointer;
+}
+.refreshbtn:active{
+    background-color: var(--background);
+    color: var(--headingfontcolor);
+    cursor: pointer;
+}
+
+.searchButton{
+    background-color: var(--background);
+    border: 1px solid var(--headingfontcolor);
+    color: var(--headingfontcolor);
+    height: 30px;
+    border-radius: 10px;
+    transition: all 0.1s ease-in-out;
+    width: 100%;
+}
+.searchButton:hover{
+    background-color: var(--headingfontcolor);
+    color: var(--background);
+    cursor: pointer;
+}
+.searchButton:active{
+    background-color: var(--background);
+    color: var(--headingfontcolor);
+    cursor: pointer;
+}
+.searchButton:disabled {
+    background-color: #ccc; /* or any color that looks "disabled" */
+    color: #666;
+    border: 1px solid #999;
+    cursor: not-allowed;
+    opacity: 0.6; /* optional for faded effect */
+}

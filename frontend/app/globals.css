@@ -1,0 +1,81 @@
+@font-face {
+  font-family: 'Ubuntu';
+  src: url('/fonts/Ubuntu/Ubuntu-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Ubuntu';
+  src: url('/fonts/Ubuntu/Ubuntu-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Ubuntu';
+  src: url('/fonts/Ubuntu/Ubuntu-Italic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+}
+
+
+
+body{
+  margin: 0px;
+  padding: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: var(--absoutebackground);
+  color: var(--basicfontcolor);
+  overflow: hidden;
+  font-family: 'Ubuntu', sans-serif;
+}
+:root {
+  --background: white;
+  --foreground: black;
+  --absoutebackground: #dedad5;
+  --basicfontcolor: black;
+  --basicfontcolorlight: rgb(61, 61, 61);
+  --headingfontcolor: #3ac4ff;
+  --chatsectionbackground: rgb(225, 225, 225);
+  --chatbackgroundcolor: #FFF1D5;
+  --chatsectionbackgroundhover: rgb(193, 193, 193);
+  --linebreakbackcolor: rgb(200, 200, 200);
+  --linebreakbackcolorlight: rgb(219, 219, 219);
+  --scrollbartrackcolor: rgb(240, 240, 240);
+  --chatselectedbackcolor: rgb(216, 216, 216);
+  --chatitembackcolorhover: rgb(236, 236, 236);
+  --chatrightbackground: #BFECFF;
+  --chatleftbackground: azure;
+  --chatdatecolor: rgb(95, 95, 95);
+  --shadow: 0 0 12px 1px #5454546f;
+  --whitescreen: rgba(255, 255, 255, 0.753);
+
+}
+
+html[data-theme='dark'] {
+  --background: #111B21;
+  --foreground: white;
+  --absoutebackground: #1e1d1c;
+  
+  --basicfontcolor: rgb(255, 255, 255);
+  --basicfontcolorlight: rgb(221, 221, 221);
+  --headingfontcolor: #3ac4ff;
+  --chatsectionbackground: #1a242a;
+  --chatbackgroundcolor: #1a2a33;
+  --chatsectionbackgroundhover: rgb(193, 193, 193);
+  --linebreakbackcolor: rgb(69, 69, 69);
+  --linebreakbackcolorlight: rgb(68, 68, 68);
+  --scrollbartrackcolor: #111B21;
+  --chatselectedbackcolor: rgb(38, 54, 63);
+  --chatitembackcolorhover: #232c31;
+  --chatrightbackground: #2d6177;
+  --chatleftbackground: #111B21;
+  --chatdatecolor: rgb(177, 177, 177);
+  --shadow: 0 0 12px 1px #1a1a1a;
+  --whitescreen: rgba(44, 44, 44, 0.753);
+}

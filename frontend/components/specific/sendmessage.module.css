@@ -1,0 +1,52 @@
+.sendmessagecont{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.sendinputcont{
+    width: 90%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.sendmessageinput{
+    width: 100%;
+    height: 60%;
+    border: none;
+    border-radius: 10px;
+    padding-left: 15px;
+    outline: none;
+    color: var(--basicfontcolorlight);
+    resize: none;
+    overflow: hidden; /* Prevents scrollbars from appearing */
+
+  min-height: 40px; /* or whatever your default height is */
+  max-height: 200px; /* optional: limit growth */
+  line-height: 1.5;
+  background-color: var(--background); /* Set the background color */
+}
+.sendmessageinput:focus {
+    outline: none; /* Ensure no outline appears on focus */
+    color: var(--basicfontcolorlight);
+}
+.sendimagecont{
+    height: 40px;
+    aspect-ratio: 1; /* Subtract the scrollbar width */
+    display: flex;
+    justify-content: center;
+    align-items: center;  
+
+}
+.sendimagecont img{
+    height: 30px;
+    width: 30px;
+    filter: contrast(0.1);
+}
+.sendimagecont img:hover{
+    filter: contrast(1);
+    cursor: pointer;
+}

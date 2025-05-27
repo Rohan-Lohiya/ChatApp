@@ -1,0 +1,135 @@
+.chatWrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 30px;
+    height: 100%;             /* ✅ Take full height of parent */
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+.chatWrapper::-webkit-scrollbar {
+    width: 8px;
+    /* Set scrollbar width */
+}
+
+.chatWrapper::-webkit-scrollbar-thumb {
+    background-color: var(--linebreakbackcolor);
+    /* Style scrollbar thumb */
+    border-radius: 10px;
+}
+
+.chatWrapper::-webkit-scrollbar-track {
+    background-color: var(--chatbackgroundcolor);
+    /* Style scrollbar track */
+}
+
+.chatRight{
+    align-self: flex-end;
+    width: auto;
+    display: flex;
+    background-color: var(--chatrightbackground);
+    border-radius: 5px;
+    max-width: 75%;
+   
+}
+.chatLeft{
+    align-self: flex-start;
+    width: auto;
+    display: flex;
+    background-color: var(--chatleftbackground);
+    border-radius: 5px;
+    max-width: 75%;
+    
+}
+.individualchatcont{
+    
+    display: flex;
+    padding: 10px;
+    position: relative;
+    border-radius: 5px;
+}
+.individualchattext{
+    font-size:smaller;
+    padding-right: 30px;
+}
+.individualchatdate{
+    font-size: x-small;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 5px;
+    color: var(--chatdatecolor);
+    display: flex;
+}
+.dateDivider{
+    display: flex;
+    align-self: center;
+    background-color: var(--chatleftbackground);
+    padding: 8px;
+    border-radius: 5px;
+    font-size: small;
+    color: var(--chatdatecolor);
+}
+.individualchatstatus{
+    position: absolute;
+    bottom: 8px;
+    right: 6px;
+}
+.typingindicator {
+    background-color: var(--chatleftbackground);
+    align-items: center;
+    gap: 4px;
+    width: fit-content;
+    height: 24px;
+    display: flex;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  .typingindicator span {
+    display: block;
+    width: 8px;
+    height: 8px;
+    background-color: #ccc;
+    border-radius: 50%;
+    animation: blink 1.2s infinite;
+  }
+  
+  .typingindicator span:nth-child(1) {
+    animation-delay: 0s;
+  }
+  
+  .typingindicator span:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+  
+  .typingindicator span:nth-child(3) {
+    animation-delay: 0.4s;
+  }
+  
+  @keyframes blink {
+    0% { opacity: 0.2; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.3); }
+    100% { opacity: 0.2; transform: scale(1); }
+  }
+
+  .newmsgbutton {
+    position:fixed;
+    bottom: 100px;
+    right: 90px;
+    padding: 8px 14px;
+    background-color: var(--chatrightbackground);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 100;
+  }
+  
+  .newmsgbutton:hover {
+    background-color: #0b4f9c;
+  }
+  
+  

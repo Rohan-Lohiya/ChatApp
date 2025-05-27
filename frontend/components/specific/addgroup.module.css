@@ -1,0 +1,315 @@
+.addGroupContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  /* Two columns with equal width */
+  gap: 10px;
+  background-color: var(--chatsectionbackground);
+  box-shadow: var(--shadow);
+  border-radius: 5px;
+  gap: 10px;
+  width: 100%;
+  height: 600px;
+}
+
+.firstcolumn {
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  gap: 10px;
+}
+
+.secondcolumn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.addgroupheading {
+  margin: 0px;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.groupimgcont {
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  height: 120px;
+  width: 120px;
+}
+
+.groupimage {
+  border-radius: 50%;
+  height: 100px;
+  width: 100px;
+}
+
+.groupnameinput {
+  border: none;
+  outline: none;
+  height: 30px;
+  border-radius: 10px;
+  padding-left: 10px;
+  background-color: var(--chatselectedbackcolor);
+  width: 90%;
+}
+
+.groupdescriptioninput {
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  padding-left: 10px;
+  background-color: var(--chatselectedbackcolor);
+  width: 90%;
+  resize: none;
+  min-height: 70px;
+  max-height: 200px;
+  line-height: 1.0;
+}
+
+.imagesourceinput {
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  padding-left: 10px;
+  background-color: var(--chatselectedbackcolor);
+  width: 90%;
+  resize: none;
+  min-height: 40px;
+  max-height: 200px;
+  line-height: 1.0;
+}
+
+.verifybtn {
+  background-color: var(--background);
+  border: 1px solid var(--headingfontcolor);
+  color: var(--headingfontcolor);
+  height: 30px;
+  border-radius: 10px;
+  transition: all 0.1s ease-in-out;
+  width: 94%;
+}
+
+.verifybtn:hover {
+  background-color: var(--headingfontcolor);
+  color: var(--background);
+  cursor: pointer;
+}
+
+.verifybtn:active {
+  background-color: var(--background);
+  color: var(--headingfontcolor);
+  cursor: pointer;
+}
+
+.addgroupmemberscont {
+  width: 95%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  margin-top: 20px;
+}
+
+.searchinput {
+  width: 85%;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  height: 30px;
+  background-color: var(--chatselectedbackcolor);
+  padding-left: 10px;
+  padding-right: 10px;
+  border-bottom-right-radius: 0px;
+  border-top-right-radius: 0px;
+}
+
+.closeimagecont {
+  background-color: var(--chatselectedbackcolor);
+  height: 30px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom-right-radius: 10px;
+  border-top-right-radius: 10px;
+  padding-right: 5px;
+}
+
+.show {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+}
+
+.hide {
+  opacity: 0;
+  transform: scale(0.8);
+  pointer-events: none;
+}
+
+.closeimagecont img {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.searchresultcont {
+  background-color: var(--chatsectionbackground);
+  width: 95%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: calc(100% - 120px);
+  overflow-y: auto;
+  border: 1px solid var(--linebreakbackcolorlight);
+  border-radius: 10px;
+}
+
+.searchresult {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding-left: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  box-sizing: border-box;
+}
+
+.searchresult:hover {
+  background-color: var(--chatitembackcolorhover);
+  cursor: pointer;
+}
+
+.searchresultimage {
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+}
+
+.nosearchresult {
+  color: var(--basicfontcolorlight);
+  margin: 20px;
+}
+
+.linebreak {
+  width: 80%;
+  height: 1px;
+  background-color: var(--linebreakbackcolorlight);
+  margin: 0px;
+  border: none;
+}
+
+.peoplelistcont {
+  background-color: var(--chatsectionbackground);
+  width: 95%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
+  height: calc(100% - 120px);
+  border: 1px solid var(--linebreakbackcolorlight);
+  border-radius: 10px;
+}
+
+.peoplelist {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding-left: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  box-sizing: border-box;
+}
+
+.peoplelist:hover {
+  background-color: var(--chatitembackcolorhover);
+  cursor: pointer;
+}
+
+.peoplelistimage {
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+}
+
+.peoplelistname {
+  color: var(--basicfontcolorlight);
+
+}
+
+.linebreak {
+  width: 80%;
+  height: 1px;
+  background-color: var(--linebreakbackcolorlight);
+  margin: 0px;
+  border: none;
+}
+.addedpeopleheadingcont{
+  display: flex;
+  font-size: medium;
+  border: 1px solid var(--linebreakbackcolorlight);
+  padding: 10px;
+  border-radius: 10px;
+  height: 170px;
+  width: 88%;
+  color: var(--basicfontcolorlight);
+
+}
+.addedpeoplecont {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  border: 1px solid var(--linebreakbackcolorlight);
+  padding: 10px;
+  border-radius: 10px;
+  height: 170px;
+  overflow-y: auto;
+  width: 88%;
+}
+
+.addedpeople {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid var(--linebreakbackcolorlight);
+  padding: 5px;
+  border-radius: 7px;
+  height: 20px;
+}
+
+.addedpeoplename {
+  font-size: small;
+  white-space: nowrap;        /* Prevent text from wrapping */
+  overflow: hidden;           /* Hide overflow text */
+  text-overflow: ellipsis;    /* Add "..." when text is too long */
+  max-width: 100px;           /* Adjust based on your layout */
+  display: inline-block;      /* Required for ellipsis to work */
+}
+
+
+.addedpeopleimage {
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+}
+
+.removepeopleimg {
+  height: 20px;
+  width: 20px;
+  cursor: pointer;
+}

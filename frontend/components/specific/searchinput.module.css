@@ -1,0 +1,94 @@
+.searchinputcontainer{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+.searchinput{
+    width: 85%;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    height: 100%;
+    background-color: var(--chatsectionbackground);
+    padding-left: 10px;
+    padding-right: 10px;
+    border-bottom-right-radius: 0px;
+    border-top-right-radius: 0px;
+}
+.closeimagecont {
+  background-color: var(--chatsectionbackground);
+  height: 100%;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom-right-radius: 10px;
+  border-top-right-radius: 10px;
+  padding-right: 5px;
+}
+
+.show {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+}
+
+.hide {
+  opacity: 0;
+  transform: scale(0.8);
+  pointer-events: none;
+}
+
+.closeimagecont img {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+.searchresultcont{
+    position: absolute;
+    top: 100%;
+    z-index: 100;
+    background-color: var(--chatsectionbackground);
+    box-shadow: var(--shadow);
+    width: 95%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.searchresult{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding-left: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  box-sizing: border-box;
+}
+.searchresult:hover{
+  background-color: var(--chatitembackcolorhover);
+  cursor: pointer;
+}
+.searchresultimage{
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+}
+.nosearchresult{
+  color: var(--basicfontcolorlight);
+  margin: 20px;
+}
+.linebreak{
+  width: 80%;
+  height: 1px;
+  background-color: var(--linebreakbackcolorlight);
+  margin: 0px;
+  border: none;
+}
