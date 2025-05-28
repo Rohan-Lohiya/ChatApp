@@ -1,13 +1,13 @@
-"use client";
-import { createSlice } from "@reduxjs/toolkit";
-import chatData from "@/components/specific/chatData";
+'use client';
+import { createSlice } from '@reduxjs/toolkit';
+import chatData from '@/components/specific/chatData';
 
 const initialState = {
-  mygoogleID: "",
-  googleID: "",
-  myname: "",
-  about: "Time pass only",
-  myprofileimage: "",
+  mygoogleID: '',
+  googleID: '',
+  myname: '',
+  about: 'Time pass only',
+  myprofileimage: '',
   totalPeople: [],
   messages: [],
   online: [], // fallback if online is not in chatData
@@ -15,15 +15,15 @@ const initialState = {
   typingUsers: [],
   totalgroup: [],
   groupdata: [],
-  webtheme: "light",
+  webtheme: 'light',
   enterissend: true,
   isgroupselected: false,
-  token: "",
+  token: '',
   grouptypingusers: [],
 };
 
 const selectedUserSlice = createSlice({
-  name: "selectedUser",
+  name: 'selectedUser',
   initialState,
   reducers: {
     setisgroupselected: (state, action) => {
@@ -43,14 +43,7 @@ const selectedUserSlice = createSlice({
       state.groupdata = action.payload;
     },
     setaddgroup: (state, action) => {
-      const {
-        groupID,
-        groupName,
-        groupImage,
-        description,
-        members,
-        groupAdmin,
-      } = action.payload;
+      const { groupID, groupName, groupImage, description, members, groupAdmin } = action.payload;
 
       const newGroup = {
         groupID,
@@ -77,24 +70,20 @@ const selectedUserSlice = createSlice({
     },
     markAsRead: (state, action) => {
       const from = action.payload;
-      state.messages = state.messages.map((msg) =>
-        msg.from === from ? { ...msg, read: true } : msg
-      );
+      state.messages = state.messages.map(msg => (msg.from === from ? { ...msg, read: true } : msg));
     },
     setonline: (state, action) => {
       state.online = action.payload;
     },
     pushonline: (state, action) => {
       const newUser = action.payload;
-      if (!state.online.some((user) => user.GoogleID === newUser.GoogleID)) {
+      if (!state.online.some(user => user.GoogleID === newUser.GoogleID)) {
         state.online.push(newUser); // Now expects object with GoogleID
       }
     },
     removeonline: (state, action) => {
       const GoogleIDToRemove = action.payload.GoogleID;
-      state.online = state.online.filter(
-        (user) => user.GoogleID !== GoogleIDToRemove
-      );
+      state.online = state.online.filter(user => user.GoogleID !== GoogleIDToRemove);
     },
     setmygoogleID: (state, action) => {
       state.mygoogleID = action.payload;
@@ -105,7 +94,7 @@ const selectedUserSlice = createSlice({
     clearchat: (state, action) => {
       const googleIDToClear = action.payload;
       state.messages = state.messages.filter(
-        (msg) =>
+        msg =>
           !(
             (msg.from === googleIDToClear && msg.to === state.mygoogleID) ||
             (msg.to === googleIDToClear && msg.from === state.mygoogleID)
@@ -114,11 +103,9 @@ const selectedUserSlice = createSlice({
     },
     removefriend: (state, action) => {
       const googleIDToRemove = action.payload;
-      state.totalPeople = state.totalPeople.filter(
-        (friend) => friend.GoogleID !== googleIDToRemove
-      );
+      state.totalPeople = state.totalPeople.filter(friend => friend.GoogleID !== googleIDToRemove);
       state.messages = state.messages.filter(
-        (msg) =>
+        msg =>
           !(
             (msg.from === googleIDToRemove && msg.to === state.mygoogleID) ||
             (msg.to === googleIDToRemove && msg.from === state.mygoogleID)
@@ -139,7 +126,7 @@ const selectedUserSlice = createSlice({
     },
     setdelivered: (state, action) => {
       const onlineId = action.payload.GoogleID;
-      state.messages = state.messages.map((message) => {
+      state.messages = state.messages.map(message => {
         if (message.to === onlineId && !message.delivered) {
           return { ...message, delivered: true };
         }
@@ -148,7 +135,7 @@ const selectedUserSlice = createSlice({
     },
     setread: (state, action) => {
       const onlineId = action.payload;
-      state.messages = state.messages.map((message) => {
+      state.messages = state.messages.map(message => {
         if (message.to === onlineId && !message.read) {
           return { ...message, read: true };
         }
@@ -157,21 +144,17 @@ const selectedUserSlice = createSlice({
     },
     pushActive: (state, action) => {
       const newUser = action.payload;
-      if (!state.isActive.some((user) => user.GoogleID === newUser.GoogleID)) {
+      if (!state.isActive.some(user => user.GoogleID === newUser.GoogleID)) {
         state.isActive.push(newUser); // Now expects object with GoogleID
       }
     },
     removeActive: (state, action) => {
       const GoogleIDToRemove = action.payload.GoogleID;
-      state.isActive = state.isActive.filter(
-        (user) => user.GoogleID !== GoogleIDToRemove
-      );
+      state.isActive = state.isActive.filter(user => user.GoogleID !== GoogleIDToRemove);
     },
     setmessagefromread: (state, action) => {
       const from = action.payload;
-      state.messages = state.messages.map((msg) =>
-        msg.from === from ? { ...msg, read: true } : msg
-      );
+      state.messages = state.messages.map(msg => (msg.from === from ? { ...msg, read: true } : msg));
     },
     addTypingUser: (state, action) => {
       const GoogleID = action.payload;
@@ -181,17 +164,15 @@ const selectedUserSlice = createSlice({
     },
     removeTypingUser: (state, action) => {
       const GoogleID = action.payload;
-      state.typingUsers = state.typingUsers.filter((id) => id !== GoogleID);
+      state.typingUsers = state.typingUsers.filter(id => id !== GoogleID);
     },
     addgrouptypingusers: (state, action) => {
       const { groupID, GoogleID } = action.payload;
-      const group = state.groupdata.find((g) => g.groupID === groupID);
+      const group = state.groupdata.find(g => g.groupID === groupID);
       if (!group) return;
 
-      const grouptypinguser = state.grouptypingusers.find(
-        (g) => g.groupID === groupID
-      );
-      if(!grouptypinguser) {
+      const grouptypinguser = state.grouptypingusers.find(g => g.groupID === groupID);
+      if (!grouptypinguser) {
         state.grouptypingusers.push({ groupID, typingUsers: [GoogleID] });
       } else {
         if (!grouptypinguser.typingUsers.includes(GoogleID)) {
@@ -201,24 +182,20 @@ const selectedUserSlice = createSlice({
     },
     removegrouptypingusers: (state, action) => {
       const { groupID, GoogleID } = action.payload;
-      const grouptypinguser = state.grouptypingusers.find(
-        (g) => g.groupID === groupID
-      );
+      const grouptypinguser = state.grouptypingusers.find(g => g.groupID === groupID);
       if (grouptypinguser) {
-        grouptypinguser.typingUsers = grouptypinguser.typingUsers.filter(
-          (id) => id !== GoogleID
-        );
+        grouptypinguser.typingUsers = grouptypinguser.typingUsers.filter(id => id !== GoogleID);
       }
     },
     setgroupmessagefromread: (state, action) => {
       const { GoogleID, groupID } = action.payload;
-      const group = state.groupdata.find((g) => g.groupID === groupID);
+      const group = state.groupdata.find(g => g.groupID === groupID);
       if (!group) return;
 
-      const presentMembers = group.members.filter((m) => m.present);
+      const presentMembers = group.members.filter(m => m.present);
       const presentCount = presentMembers.length;
 
-      group.groupMessages = group.groupMessages.map((msg) => {
+      group.groupMessages = group.groupMessages.map(msg => {
         // Skip if already read by this user
         const alreadyRead = msg.readBy.includes(GoogleID);
         const newReadBy = alreadyRead ? msg.readBy : [...msg.readBy, GoogleID];
@@ -235,17 +212,17 @@ const selectedUserSlice = createSlice({
 
     addgroupmessage: (state, action) => {
       const { groupID, message } = action.payload;
-      const group = state.groupdata.find((g) => g.groupID === groupID);
+      const group = state.groupdata.find(g => g.groupID === groupID);
       if (group) {
         group.groupMessages.push(message);
       }
     },
     setgroupdelivered: (state, action) => {
       const { GoogleID, groupID } = action.payload;
-      const group = state.groupdata.find((g) => g.groupID === groupID);
+      const group = state.groupdata.find(g => g.groupID === groupID);
       if (!group) return;
 
-      group.groupMessages = group.groupMessages.map((msg) => {
+      group.groupMessages = group.groupMessages.map(msg => {
         let updatedMsg = msg;
         if (!msg.deliveredTo.includes(GoogleID)) {
           updatedMsg = {
@@ -265,13 +242,11 @@ const selectedUserSlice = createSlice({
     },
     setaddgroupmembers: (state, action) => {
       const { formattedMembers, groupID } = action.payload;
-      const group = state.groupdata.find((g) => g.groupID === groupID);
+      const group = state.groupdata.find(g => g.groupID === groupID);
       if (!group) return;
 
-      formattedMembers.forEach((newMember) => {
-        const existing = group.members.find(
-          (m) => m.GoogleID === newMember.GoogleID
-        );
+      formattedMembers.forEach(newMember => {
+        const existing = group.members.find(m => m.GoogleID === newMember.GoogleID);
         if (!existing) {
           // New member: add directly
           group.members.push(newMember);
@@ -288,39 +263,31 @@ const selectedUserSlice = createSlice({
 
     setgroupAdmin: (state, action) => {
       const { groupID, admins } = action.payload;
-      const group = state.groupdata.find((g) => g.groupID === groupID);
+      const group = state.groupdata.find(g => g.groupID === groupID);
       if (!group) return;
 
-      const existingIDs = new Set(group.groupAdmin.map((a) => a.GoogleID));
-      const newAdmins = admins.filter((a) => !existingIDs.has(a.GoogleID));
+      const existingIDs = new Set(group.groupAdmin.map(a => a.GoogleID));
+      const newAdmins = admins.filter(a => !existingIDs.has(a.GoogleID));
 
       // Push new admin objects into groupAdmin
-      group.groupAdmin.push(
-        ...newAdmins.map((a) => ({ GoogleID: a.GoogleID }))
-      );
+      group.groupAdmin.push(...newAdmins.map(a => ({ GoogleID: a.GoogleID })));
     },
     setmemberremoval: (state, action) => {
       const { groupID, removedmember } = action.payload;
-      const group = state.groupdata.find((g) => g.groupID === groupID);
+      const group = state.groupdata.find(g => g.groupID === groupID);
       if (!group) return;
 
       if (removedmember === state.mygoogleID) {
-        state.groupdata = state.groupdata.filter((g) => g.groupID !== groupID);
-        state.totalgroup = state.totalgroup.filter(
-          (g) => g.groupID !== groupID
-        );
+        state.groupdata = state.groupdata.filter(g => g.groupID !== groupID);
+        state.totalgroup = state.totalgroup.filter(g => g.groupID !== groupID);
       } else {
         if (group.members) {
-          const member = group.members.find(
-            (member) => member.GoogleID === removedmember
-          );
+          const member = group.members.find(member => member.GoogleID === removedmember);
           if (member) member.present = false;
         }
-        const totalGroup = state.totalgroup.find((g) => g.groupID === groupID);
+        const totalGroup = state.totalgroup.find(g => g.groupID === groupID);
         if (totalGroup && totalGroup.members) {
-          totalGroup.members = totalGroup.members.filter(
-            (member) => member.GoogleID !== removedmember
-          );
+          totalGroup.members = totalGroup.members.filter(member => member.GoogleID !== removedmember);
         }
       }
     },
@@ -329,10 +296,21 @@ const selectedUserSlice = createSlice({
     },
     setgroupdescription: (state, action) => {
       const { groupID, description } = action.payload;
-      const group = state.groupdata.find((g) => g.groupID === groupID);
+      const group = state.groupdata.find(g => g.groupID === groupID);
       if (group) {
         group.description = description;
       }
+    },
+    setdeletemessage: (state, action) => {
+      const messagesToDelete = action.payload.deleted;
+
+      if (!Array.isArray(messagesToDelete)) return;
+
+      state.messages = state.messages.filter(msg => {
+        return !messagesToDelete.some(
+          delMsg => msg.timestamp === delMsg.timestamp && msg.from === delMsg.from && msg.to === delMsg.to
+        );
+      });
     },
   },
 });
@@ -374,6 +352,7 @@ export const {
   addgrouptypingusers,
   removegrouptypingusers,
   setgroupdescription,
+  setdeletemessage,
 } = selectedUserSlice.actions;
 
 export default selectedUserSlice.reducer;

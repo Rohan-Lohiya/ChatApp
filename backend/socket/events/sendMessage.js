@@ -6,7 +6,7 @@ const sendMessage = async (socket, io, { userroom, message }) => {
   if (!fromGoogleId || !userroom || !message) return;
   const currentActiveChat = Userwithfriends.get(userroom);
   const isActive = currentActiveChat === fromGoogleId;
-  console.log(fromGoogleId," is active with ", userroom, ":", isActive);
+  console.log(fromGoogleId, " is active with ", userroom, ":", isActive);
 
   const [receiver, sender] = await Promise.all([
     Chatdata.findOne({ myGoogleID: userroom }),
@@ -33,6 +33,7 @@ const sendMessage = async (socket, io, { userroom, message }) => {
   if (recipientSocketId) {
     io.to(recipientSocketId).emit("receive-message", messageData);
   }
+  io.to(socket.id).emit("receive-message", messageData);
 };
 
 module.exports = sendMessage;

@@ -2,7 +2,6 @@ const Chatdata = require("../../model/Chatdata");
 const { userMap, socketToUser, Userwithfriends } = require("../helpers/socketMaps");
 
 const markAsRead = async (socket, io, selectedGoogleID) => {
-  
   const senderGoogleID = socketToUser.get(socket.id);
   Userwithfriends.set(senderGoogleID, selectedGoogleID); // Store the selectedGoogleID for the sender
   if (!senderGoogleID || !selectedGoogleID) return;
@@ -18,31 +17,20 @@ const markAsRead = async (socket, io, selectedGoogleID) => {
     receiverChanged = false;
 
   sender.messages.forEach((msg) => {
-    if (
-      msg.from === selectedGoogleID &&
-      msg.to === senderGoogleID &&
-      !msg.read
-    ) {
+    if (msg.from === senderGoogleID && msg.to === selectedGoogleID && !msg.read) {
       msg.read = true;
       senderChanged = true;
     }
   });
 
   receiver.messages.forEach((msg) => {
-    if (
-      msg.from === senderGoogleID &&
-      msg.to === selectedGoogleID &&
-      !msg.read
-    ) {
+    if (msg.from === senderGoogleID && msg.to === selectedGoogleID && !msg.read) {
       msg.read = true;
       receiverChanged = true;
     }
   });
 
-  await Promise.all([
-    senderChanged ? sender.save() : null,
-    receiverChanged ? receiver.save() : null,
-  ]);
+  await Promise.all([senderChanged ? sender.save() : null, receiverChanged ? receiver.save() : null]);
 
   const friendGoogleIDs = sender.friends.map((f) => f.GoogleID);
 
@@ -65,9 +53,7 @@ const markAsRead = async (socket, io, selectedGoogleID) => {
     const originalLength = friendDB.isActive.length;
 
     // ✅ Remove senderGoogleID from friend's isActive array
-    friendDB.isActive = friendDB.isActive.filter(
-      (f) => f.GoogleID !== senderGoogleID
-    );
+    friendDB.isActive = friendDB.isActive.filter((f) => f.GoogleID !== senderGoogleID);
 
     if (friendDB.isActive.length !== originalLength) {
       // ✅ Emit not-active to friend if removal happened

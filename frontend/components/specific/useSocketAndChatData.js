@@ -1,9 +1,9 @@
-"use client";
-import React from "react";
-import axios from "axios";
-import socket from "../socket";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+'use client';
+import React from 'react';
+import axios from 'axios';
+import socket from '../socket';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   setChatData,
   setmygoogleID,
@@ -34,15 +34,16 @@ import {
   removegrouptypingusers,
   settoken,
   setgroupdescription,
-} from "@/app/store/selectedUserSlice";
+  setdeletemessage,
+} from '@/app/store/selectedUserSlice';
 
 export function useSocketAndChatData(session) {
   const [isLoading, setisLoading] = useState(true);
   const [error, seterror] = useState(null);
   const [hasFetched, sethasFetched] = useState(false);
   const dispatch = useDispatch();
-  const friend = useSelector((state) => state.selectedUser.totalPeople);
-  const mygoogleID = useSelector((state) => state.selectedUser?.mygoogleID);
+  const friend = useSelector(state => state.selectedUser.totalPeople);
+  const mygoogleID = useSelector(state => state.selectedUser?.mygoogleID);
 
   // ✅ Still set token in Redux for other components to use
   useEffect(() => {
@@ -56,7 +57,7 @@ export function useSocketAndChatData(session) {
 
     // ✅ Check if we have the token from session
     if (!session?.backendToken) {
-      console.log("No backend token in session yet, waiting...");
+      console.log('No backend token in session yet, waiting...');
       return;
     }
 
@@ -72,18 +73,18 @@ export function useSocketAndChatData(session) {
         // ✅ Use session.backendToken directly
 
         const response = await axios.post(
-          "http://localhost:5000/api/get-chat-data",
+          'http://localhost:5000/api/get-chat-data',
           {}, // Empty data object since your backend doesn't expect any body data
           {
             headers: {
-              "Content-Type": "application/json",
+              'Content-Type': 'application/json',
               Authorization: `Bearer ${session.backendToken}`, // ✅ Use session token directly
             },
           }
         );
 
         if (response.data?.chatData) {
-          console.log("✅ Chat data fetched:", response.data);
+          console.log('✅ Chat data fetched:', response.data);
           dispatch(setChatData(response.data.chatData));
           dispatch(setgroupdata(response.data.groupdata));
           dispatch(setmygoogleID(response.data.chatData.myGoogleID));
@@ -93,11 +94,11 @@ export function useSocketAndChatData(session) {
           sethasFetched(true);
         }
       } catch (err) {
-        console.error("⚠️ Error fetching chat data:", err);
-        seterror(err.response?.data?.error || "Failed to fetch chat data");
+        console.error('⚠️ Error fetching chat data:', err);
+        seterror(err.response?.data?.error || 'Failed to fetch chat data');
         if (err.response?.status === 404) {
-          console.log("🆕 Registering user:", session.user.email);
-          socket.emit("register-user", {
+          console.log('🆕 Registering user:', session.user.email);
+          socket.emit('register-user', {
             googleIdOrEmail: session.user.email,
             imageURL: session.user.image,
             name: session.user.name,
@@ -110,19 +111,19 @@ export function useSocketAndChatData(session) {
     };
 
     const onConnect = () => {
-      console.log("socket connected:", socket.id);
-      socket.emit("register-user", {
+      console.log('socket connected:', socket.id);
+      socket.emit('register-user', {
         googleIdOrEmail: session.user.email,
         imageURL: session.user.image,
         name: session.user.name,
       });
       fetchOrRegisterUser();
     };
-    const onRegistrationComplete = (data) => {
-      console.log("User registered:", data);
+    const onRegistrationComplete = data => {
+      console.log('User registered:', data);
     };
-    const onReceiveMessage = (data) => {
-      console.log("Message received:", data);
+    const onReceiveMessage = data => {
+      console.log('Message received:', data);
       dispatch(
         addMessage({
           from: data.from,
@@ -134,11 +135,9 @@ export function useSocketAndChatData(session) {
         })
       );
     };
-    const onReceiveaddfriend = (data) => {
-      console.log("Friend request received:", data);
-      const friendexist = friend.find(
-        (friend) => friend.GoogleID === data.googleID
-      );
+    const onReceiveaddfriend = data => {
+      console.log('Friend request received:', data);
+      const friendexist = friend.find(friend => friend.GoogleID === data.googleID);
       if (!friendexist) {
         dispatch(
           setaddpeople({
@@ -149,8 +148,8 @@ export function useSocketAndChatData(session) {
         );
       }
     };
-    const onReceiveGroupMessage = (data) => {
-      console.log("Group message received: ", data);
+    const onReceiveGroupMessage = data => {
+      console.log('Group message received: ', data);
       dispatch(
         addgroupmessage({
           groupID: data.groupID,
@@ -158,8 +157,8 @@ export function useSocketAndChatData(session) {
         })
       );
     };
-    const onGroupMessageRead = (data) => {
-      console.log("group message read by: ", data);
+    const onGroupMessageRead = data => {
+      console.log('group message read by: ', data);
       dispatch(
         setgroupmessagefromread({
           GoogleID: data.GoogleID,
@@ -167,50 +166,48 @@ export function useSocketAndChatData(session) {
         })
       );
     };
-    const onGroupUserOnline = (data) => {
-      console.log("group user online: ", data);
-      dispatch(
-        setgroupdelivered({ GoogleID: data.GoogleID, groupID: data.groupID })
-      );
+    const onGroupUserOnline = data => {
+      console.log('group user online: ', data);
+      dispatch(setgroupdelivered({ GoogleID: data.GoogleID, groupID: data.groupID }));
     };
-    const onGroupMemberAdded = (data) => {
+    const onGroupMemberAdded = data => {
       const { formattedMembers, groupID } = data;
       dispatch(setaddgroupmembers({ formattedMembers, groupID }));
     };
-    const onNewGroupJoined = (data) => {
+    const onNewGroupJoined = data => {
       dispatch(setaddgroup(data));
-      console.log("joined new group");
+      console.log('joined new group');
     };
-    const onGroupAdminUpdate = (data) => {
+    const onGroupAdminUpdate = data => {
       dispatch(setgroupAdmin(data));
     };
-    const onGroupMemberRemoval = (data) => {
+    const onGroupMemberRemoval = data => {
       if (data.removedmember === mygoogleID) {
-        dispatch(setSelectedGoogleID(""));
+        dispatch(setSelectedGoogleID(''));
       }
       dispatch(setmemberremoval(data));
     };
-    const ongroupdescriptionchanged = (data) => {
+    const ongroupdescriptionchanged = data => {
       dispatch(setgroupdescription(data));
-    }
+    };
 
-    socket.on("connect", onConnect);
-    socket.on("receive-message", onReceiveMessage);
-    socket.on("registration-complete", onRegistrationComplete);
-    socket.on("recieve-add-friend", onReceiveaddfriend);
-    socket.on("receive-groupmessage", onReceiveGroupMessage);
-    socket.on("group-message-read", onGroupMessageRead);
-    socket.on("group-user-online", onGroupUserOnline);
-    socket.on("groupmemberadded", onGroupMemberAdded);
-    socket.on("newgroupjoined", onNewGroupJoined);
-    socket.on("group-admin-update", onGroupAdminUpdate);
-    socket.on("removed-group-member", onGroupMemberRemoval);
-    socket.on("group-description-changed", ongroupdescriptionchanged);
-    socket.on("deletefriend", (data) => {
+    socket.on('connect', onConnect);
+    socket.on('receive-message', onReceiveMessage);
+    socket.on('registration-complete', onRegistrationComplete);
+    socket.on('recieve-add-friend', onReceiveaddfriend);
+    socket.on('receive-groupmessage', onReceiveGroupMessage);
+    socket.on('group-message-read', onGroupMessageRead);
+    socket.on('group-user-online', onGroupUserOnline);
+    socket.on('groupmemberadded', onGroupMemberAdded);
+    socket.on('newgroupjoined', onNewGroupJoined);
+    socket.on('group-admin-update', onGroupAdminUpdate);
+    socket.on('removed-group-member', onGroupMemberRemoval);
+    socket.on('group-description-changed', ongroupdescriptionchanged);
+    socket.on('deletefriend', data => {
       dispatch(removefriend(data));
     });
-    socket.on("user-online", (data) => {
-      console.log("🟢 User online:", data);
+    socket.on('user-online', data => {
+      console.log('🟢 User online:', data);
       dispatch(
         pushonline({
           GoogleID: data.GoogleID || data.googleID,
@@ -219,8 +216,8 @@ export function useSocketAndChatData(session) {
       );
       dispatch(setdelivered({ GoogleID: data.GoogleID || data.googleID }));
     });
-    socket.on("user-offline", (data) => {
-      console.log("🔴 User offline:", data);
+    socket.on('user-offline', data => {
+      console.log('🔴 User offline:', data);
       dispatch(
         removeonline({
           GoogleID: data.GoogleID || data.googleID, // Handle both cases
@@ -228,36 +225,42 @@ export function useSocketAndChatData(session) {
       );
       dispatch(removeActive(data));
     });
-    socket.on("message-read", (data) => {
-      console.log("message read by :", data.GoogleID);
+    socket.on('message-read', data => {
+      console.log('message read by :', data.GoogleID);
       dispatch(setread(data.GoogleID));
       dispatch(pushActive(data));
     });
-    socket.on("not-active", (data) => {
-      console.log("User not active", data);
+    socket.on('not-active', data => {
+      console.log('User not active', data);
       dispatch(removeActive(data));
     });
-    socket.on("usertyping", ({ from }) => {
-      console.log("User typing:", from);
+    socket.on('usertyping', ({ from }) => {
+      console.log('User typing:', from);
       dispatch(addTypingUser(from));
     });
 
-    socket.on("userstopTyping", ({ from }) => {
-      console.log("User stopped typing:", from);
+    socket.on('userstopTyping', ({ from }) => {
+      console.log('User stopped typing:', from);
       dispatch(removeTypingUser(from));
     });
-    socket.on("groupusertyping", (data) => {
-      console.log("User typing:", data);
+    socket.on('groupusertyping', data => {
+      console.log('User typing:', data);
       dispatch(addgrouptypingusers(data));
     });
 
-    socket.on("groupuserstopTyping", (data) => {
-      console.log("User stopped typing:", data);
+    socket.on('groupuserstopTyping', data => {
+      console.log('User stopped typing:', data);
       dispatch(removegrouptypingusers(data));
+    });
+    socket.on('messagesDeletedMe', data => {
+      dispatch(setdeletemessage(data));
+    });
+    socket.on('messagesDeletedEveryone', data => {
+      dispatch(setdeletemessage(data));
     });
 
     return () => {
-      socket.off("connect", onConnect);
+      socket.off('connect', onConnect);
     };
   }, [session, hasFetched]); // ✅ Depend on session, which includes backendToken
 
