@@ -7,6 +7,8 @@ const sendGroupMessage = require("./events/sendGroupMessage");
 const groupMarkAsRead = require("./events/groupMarkAsRead");
 const deleteMessageMe = require("./events/deleteMessageMe");
 const deleteMessageEveryone = require("./events/deleteMessageEveryone");
+const deleteGroupMessage = require("./events/deleteGroupMessage");
+const delGrpMsgByAdmin = require("./events/delGrpMsgByAdmin");
 const { userMap } = require("./helpers/socketMaps");
 
 module.exports = function setupSocket(io) {
@@ -37,5 +39,7 @@ module.exports = function setupSocket(io) {
     socket.on("group-mark-as-read", (data) => groupMarkAsRead(socket, io, data));
     socket.on("delete-message-me", (data) => deleteMessageMe(socket, io, data));
     socket.on("delete-message-everyone", ({ data, to }) => deleteMessageEveryone(socket, io, { data, to }));
+    socket.on("delete-group-message", ({ data, groupID }) => deleteGroupMessage(socket, io, { data, groupID }));
+    socket.on("del-grp-mes-byAdmin", ({ data, groupID }) => delGrpMsgByAdmin(socket, io, { data, groupID }));
   });
 };

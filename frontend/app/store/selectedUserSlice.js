@@ -312,6 +312,34 @@ const selectedUserSlice = createSlice({
         );
       });
     },
+    deletegroupmessage: (state, action) => {
+      const { groupID, deleted } = action.payload;
+      const group = state.groupdata.find(g => g.groupID === groupID);
+      if (!group) return;
+
+      group.groupMessages = group.groupMessages.filter(msg => {
+        return !deleted.some(del => msg.timestamp === del.timestamp && msg.text === del.text && msg.from === del.from);
+      });
+    },
+    deletegroupmsgbyadmin: (state, action) => {
+      const { groupID, updated } = action.payload;
+
+      // Find the group
+      const group = state.groupdata.find(group => group.groupID === groupID);
+      if (!group) return;
+
+      // Update messages
+      group.groupMessages.forEach(msg => {
+        const shouldDelete = updated.some(
+          del => del.timestamp === msg.timestamp && del.from === msg.from && groupID === msg.groupID
+        );
+
+        if (shouldDelete) {
+          msg.text = 'Message deleted by admin';
+          msg.messagetype = 'delete';
+        }
+      });
+    },
   },
 });
 
@@ -353,6 +381,8 @@ export const {
   removegrouptypingusers,
   setgroupdescription,
   setdeletemessage,
+  deletegroupmessage,
+  deletegroupmsgbyadmin,
 } = selectedUserSlice.actions;
 
 export default selectedUserSlice.reducer;

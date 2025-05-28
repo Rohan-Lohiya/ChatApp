@@ -35,6 +35,8 @@ import {
   settoken,
   setgroupdescription,
   setdeletemessage,
+  deletegroupmessage,
+  deletegroupmsgbyadmin,
 } from '@/app/store/selectedUserSlice';
 
 export function useSocketAndChatData(session) {
@@ -257,6 +259,15 @@ export function useSocketAndChatData(session) {
     });
     socket.on('messagesDeletedEveryone', data => {
       dispatch(setdeletemessage(data));
+    });
+    socket.on('groupMessagesDeleted', data => {
+      dispatch(deletegroupmessage(data));
+    });
+    socket.on('groupMessagesDeletedByAdmin', data => {
+      dispatch(deletegroupmsgbyadmin(data));
+    });
+    socket.on('error', data => {
+      console.log('error', data);
     });
 
     return () => {
