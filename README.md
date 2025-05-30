@@ -1,3 +1,5 @@
+![HomePage](https://github.com/user-attachments/assets/42fb24d7-58ef-4e95-91fa-b4ff856dc164)
+
 # 🗨️ ChatBox
 
 A full-stack real-time chat application with support for **single** and **group chats**, admin controls, theming, and seamless authentication. Built with **Next.js**, **Node.js**, and **Socket.IO**.
@@ -102,8 +104,10 @@ npm run dev
 
 ## 🚀 Deployment
 
-- Frontend: [Vercel](https://vercel.com/)
-- Backend: [Vercel Functions](https://vercel.com/docs/functions) or [Render](https://render.com/), [Railway](https://railway.app/), or any Node host
+When deploying:
+
+1. Set production `.env` files for both backend and frontend.
+2. Update Google Cloud Console's **OAuth consent screen** and **Authorized Redirect URIs** to match your deployed domain.
 
 ---
 
@@ -133,14 +137,16 @@ backend/
 
 ## 📸 Screenshots
 
-> Add some screenshots or a short demo video/gif to showcase the UI and features.
+![About](https://github.com/user-attachments/assets/e91c63fd-e054-43a2-a0f8-be50ee5eca4e)
+![GroupChat](https://github.com/user-attachments/assets/e4510349-2aa6-4653-ac5a-87fb9f87c551)
+![SingleChat](https://github.com/user-attachments/assets/d3da0a8c-f083-4895-bb0b-2ffa9c3c1d60)
 
 ---
 
 ## 🧑‍💻 Author
 
 **Rohan Lohiya**  
-[LinkedIn](https://linkedin.com/in/your-profile) • [GitHub](https://github.com/your-username)
+IIIT Guwahati
 
 ---
 
