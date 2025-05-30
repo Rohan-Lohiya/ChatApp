@@ -54,7 +54,7 @@ A full-stack real-time chat application with support for **single** and **group 
 
 ### 1. Clone the repo
 ```bash
-git clone https://github.com/your-username/chatsphere.git
+git clone https://github.com/Rohan-Lohiya/ChatApp.git
 cd ChatApp
 ```
 
