@@ -75,7 +75,7 @@ export function useSocketAndChatData(session) {
         // ✅ Use session.backendToken directly
 
         const response = await axios.post(
-          'http://localhost:5000/api/get-chat-data',
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/get-chat-data`,
           {}, // Empty data object since your backend doesn't expect any body data
           {
             headers: {

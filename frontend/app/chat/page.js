@@ -138,7 +138,7 @@ const page = () => {
   };
   const handleclearchat = async () => {
     console.log('Clear chat clicked for Google ID:', selectedGoogleID);
-    const res = await fetch('http://localhost:5000/chat/clear-chat', {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/chat/clear-chat`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -161,7 +161,7 @@ const page = () => {
   };
   const handledeletechat = async () => {
     console.log('Delete chat clicked for Google ID:', selectedGoogleID);
-    const res = await fetch('http://localhost:5000/chat/delete-chat', {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/chat/delete-chat`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

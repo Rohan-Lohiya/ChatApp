@@ -149,7 +149,7 @@ const SelectedChatsInfo = ({ setShowAbout, setdeletechatpressed }) => {
         }
         try {
           const response = await axios.post(
-            'http://localhost:5000/group/addadmin',
+            `${process.env.NEXT_PUBLIC_BACKEND_URL}/group/addadmin`,
             {
               groupID: selectedgoogleID,
               newAdmin: GoogleID,
@@ -197,7 +197,7 @@ const SelectedChatsInfo = ({ setShowAbout, setdeletechatpressed }) => {
 
     try {
       const response = await axios.post(
-        'http://localhost:5000/group/remove-member',
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/group/remove-member`,
         {
           groupID: selectedgoogleID,
           member: GoogleID,
@@ -222,7 +222,7 @@ const SelectedChatsInfo = ({ setShowAbout, setdeletechatpressed }) => {
 
   const handleLeaveGroup = async () => {
     console.log('leave group presed');
-    const res = await fetch('http://localhost:5000/group/leavegroup', {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/group/leavegroup`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -259,7 +259,7 @@ const SelectedChatsInfo = ({ setShowAbout, setdeletechatpressed }) => {
       setdescriptionbtndisabled(true); // Disable button to prevent multiple clicks
       try {
         const response = await axios.post(
-          'http://localhost:5000/group/changedescription',
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/group/changedescription`,
           { groupID: selectedgoogleID, description: about },
           {
             headers: {

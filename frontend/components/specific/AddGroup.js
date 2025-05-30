@@ -1,26 +1,24 @@
-import React from "react";
-import { useState } from "react";
-import styles from "./addgroup.module.css";
-import Image from "next/image";
-import { useSelector, useDispatch } from "react-redux";
-import Fuse from "fuse.js";
-import { setaddgroup } from "@/app/store/selectedUserSlice";
-import axios from "axios";
+import React from 'react';
+import { useState } from 'react';
+import styles from './addgroup.module.css';
+import Image from 'next/image';
+import { useSelector, useDispatch } from 'react-redux';
+import Fuse from 'fuse.js';
+import { setaddgroup } from '@/app/store/selectedUserSlice';
+import axios from 'axios';
 
-const AddGroup = ({setaddgrouppressed}) => {
-  const [groupimagesrc, setgroupimagesrc] = useState("/groupprofile.png");
-  const [imagesource, setimagesource] = useState("");
-  const [groupname, setgroupname] = useState("");
-  const [groupdescription, setgroupdescription] = useState("");
-  const totatlpeople = useSelector((state) => state.selectedUser.totalPeople);
-  const myprofileimage = useSelector(
-    (state) => state.selectedUser.myprofileimage
-  );
-  const mygoogleID = useSelector((state) => state.selectedUser.mygoogleID);
-  const myname = useSelector((state) => state.selectedUser.myname);
-  const about = useSelector((state) => state.selectedUser.about);
+const AddGroup = ({ setaddgrouppressed }) => {
+  const [groupimagesrc, setgroupimagesrc] = useState('/groupprofile.png');
+  const [imagesource, setimagesource] = useState('');
+  const [groupname, setgroupname] = useState('');
+  const [groupdescription, setgroupdescription] = useState('');
+  const totatlpeople = useSelector(state => state.selectedUser.totalPeople);
+  const myprofileimage = useSelector(state => state.selectedUser.myprofileimage);
+  const mygoogleID = useSelector(state => state.selectedUser.mygoogleID);
+  const myname = useSelector(state => state.selectedUser.myname);
+  const about = useSelector(state => state.selectedUser.about);
   const [searchResult, setsearchResult] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState('');
   const [groupmembers, setgroupmembers] = useState([
     {
       GoogleID: mygoogleID,
@@ -29,12 +27,14 @@ const AddGroup = ({setaddgrouppressed}) => {
       about: about,
     },
   ]);
-  const [groupAdmin, setgroupAdmin] = useState([{
-    GoogleID: mygoogleID,
+  const [groupAdmin, setgroupAdmin] = useState([
+    {
+      GoogleID: mygoogleID,
       name: myname,
       image: myprofileimage,
-  }])
-    const dispatch = useDispatch();
+    },
+  ]);
+  const dispatch = useDispatch();
   const fuseOptions = {
     // isCaseSensitive: false,
     includeScore: true,
@@ -50,59 +50,53 @@ const AddGroup = ({setaddgrouppressed}) => {
     // ignoreLocation: false,
     // ignoreFieldNorm: false,
     // fieldNormWeight: 1,
-    keys: ["name", "GoogleID"],
+    keys: ['name', 'GoogleID'],
   };
 
   const fuse = new Fuse(totatlpeople, fuseOptions);
   const result = fuse.search(searchTerm);
-  const handlesearchtoadd = (e) => {
+  const handlesearchtoadd = e => {
     const value = e.target.value;
     setSearchTerm(value);
     setsearchResult(result);
     console.log(result);
   };
 
-  const handlegroupname = (e) => {
+  const handlegroupname = e => {
     setgroupname(e.target.value);
   };
-  const handlegroudescription = (e) => {
+  const handlegroudescription = e => {
     setgroupdescription(e.target.value);
   };
-  const handleaddpeople = (GoogleID) => {
-    setSearchTerm("");
-    setsearchResult("");
-    const selectedUser = totatlpeople.find(
-      (item) => item.GoogleID === GoogleID
-    );
-    const alreadyAdded = groupmembers.some(
-      (item) => item.GoogleID === GoogleID
-    );
+  const handleaddpeople = GoogleID => {
+    setSearchTerm('');
+    setsearchResult('');
+    const selectedUser = totatlpeople.find(item => item.GoogleID === GoogleID);
+    const alreadyAdded = groupmembers.some(item => item.GoogleID === GoogleID);
     const member = {
       GoogleID: selectedUser.GoogleID,
       imageURL: selectedUser.image,
       name: selectedUser.name,
       about: selectedUser.about,
-    }
+    };
     if (alreadyAdded) {
-      alert("User already added");
+      alert('User already added');
       return;
     }
     if (selectedUser) {
-      setgroupmembers((prevMembers) => {
+      setgroupmembers(prevMembers => {
         const updated = [...prevMembers, member];
-        console.log("Selected User:", updated);
+        console.log('Selected User:', updated);
         return updated;
       });
     }
   };
-  const removepeople = (GoogleID) => {
-    const updatedMembers = groupmembers.filter(
-      (item) => item.GoogleID !== GoogleID
-    );
+  const removepeople = GoogleID => {
+    const updatedMembers = groupmembers.filter(item => item.GoogleID !== GoogleID);
     setgroupmembers(updatedMembers);
   };
-  const handlechangeimage = (e) => {
-    if (e.target.value === "mine") {
+  const handlechangeimage = e => {
+    if (e.target.value === 'mine') {
       console.log(myprofileimage);
       setimagesource(myprofileimage);
     } else {
@@ -110,9 +104,9 @@ const AddGroup = ({setaddgrouppressed}) => {
     }
   };
   const handleverifyimage = () => {
-    if (imagesource.trim() === "") {
-      alert("Image URL is empty, using default image");
-      setgroupimagesrc("/groupprofile.png");
+    if (imagesource.trim() === '') {
+      alert('Image URL is empty, using default image');
+      setgroupimagesrc('/groupprofile.png');
       return;
     }
 
@@ -121,34 +115,31 @@ const AddGroup = ({setaddgrouppressed}) => {
       setgroupimagesrc(imagesource); // Valid image
     };
     testImg.onerror = () => {
-      alert("Invalid image URL");
+      alert('Invalid image URL');
     };
     testImg.src = imagesource;
   };
   const handlecreategroup = () => {
     const newgroup = {
-        groupName: groupname,
-        groupImage: groupimagesrc,
-        members: groupmembers,
-        groupAdmin: groupAdmin,
-        description: groupdescription,
+      groupName: groupname,
+      groupImage: groupimagesrc,
+      members: groupmembers,
+      groupAdmin: groupAdmin,
+      description: groupdescription,
     };
-    if(!groupimagesrc || !groupname || groupmembers.length < 2 ){
-        alert("Missing feids");
-        return;
+    if (!groupimagesrc || !groupname || groupmembers.length < 2) {
+      alert('Missing feids');
+      return;
     }
     const fetchData = async () => {
       try {
-        const response = await axios.post(
-          "http://localhost:5000/group/creategroup",
-          newgroup
-        );
-        console.log("Group created successfully:", response.data);
-       setaddgrouppressed(false);
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/group/creategroup`, newgroup);
+        console.log('Group created successfully:', response.data);
+        setaddgrouppressed(false);
       } catch (error) {
-        console.error("Error creating group:", error);
+        console.error('Error creating group:', error);
       }
-    }
+    };
     fetchData();
   };
 
@@ -157,13 +148,7 @@ const AddGroup = ({setaddgrouppressed}) => {
       <div className={styles.firstcolumn}>
         <h2 className={styles.addgroupheading}>Create Group</h2>
         <div className={styles.groupimgcont}>
-          <Image
-            className={styles.groupimage}
-            src={groupimagesrc}
-            height={100}
-            width={100}
-            alt="groupImage"
-          ></Image>
+          <Image className={styles.groupimage} src={groupimagesrc} height={100} width={100} alt="groupImage"></Image>
         </div>
         <input
           className={styles.groupnameinput}
@@ -187,11 +172,11 @@ const AddGroup = ({setaddgrouppressed}) => {
           placeholder="Add image URL or type 'mine' to use your profile image"
         />
         <button className={styles.verifybtn} onClick={handleverifyimage}>
-          {imagesource.trim() === "" ? "Use Default Image" : "Verify Image"}
+          {imagesource.trim() === '' ? 'Use Default Image' : 'Verify Image'}
         </button>
         {groupmembers.length > 1 && (
           <div className={styles.addedpeoplecont}>
-            {groupmembers.map((item) => {
+            {groupmembers.map(item => {
               return (
                 <React.Fragment key={item.GoogleID}>
                   {item.GoogleID !== mygoogleID && (
@@ -201,17 +186,15 @@ const AddGroup = ({setaddgrouppressed}) => {
                         src={item.imageURL}
                         height={20}
                         width={20}
-                        alt="Profile"
-                      ></Image>
+                        alt="Profile"></Image>
                       <div className={styles.addedpeoplename}>{item.name}</div>
                       <Image
                         className={styles.removepeopleimg}
-                        src={"/closelight.png"}
+                        src={'/closelight.png'}
                         height={20}
                         width={20}
                         alt="cancel"
-                        onClick={() => removepeople(item.GoogleID)}
-                      ></Image>
+                        onClick={() => removepeople(item.GoogleID)}></Image>
                     </div>
                   )}
                 </React.Fragment>
@@ -219,11 +202,7 @@ const AddGroup = ({setaddgrouppressed}) => {
             })}
           </div>
         )}
-        {groupmembers.length == 1 && (
-          <div className={styles.addedpeopleheadingcont}>
-            Added people will list here
-          </div>
-        )}
+        {groupmembers.length == 1 && <div className={styles.addedpeopleheadingcont}>Added people will list here</div>}
       </div>
       <div className={styles.secondcolumn}>
         <div className={styles.addgroupmemberscont}>
@@ -238,61 +217,48 @@ const AddGroup = ({setaddgrouppressed}) => {
             <Image
               className={`${searchTerm ? styles.show : styles.hide}`}
               onClick={() => {
-                setSearchTerm("");
-                setsearchResult("");
+                setSearchTerm('');
+                setsearchResult('');
               }}
-              src={"/closelight.png"}
+              src={'/closelight.png'}
               height={30}
               width={30}
-              alt="Close"
-            ></Image>
+              alt="Close"></Image>
           </span>
         </div>
         {searchTerm && (
           <div className={styles.searchresultcont}>
-            {searchResult.map((item) => {
+            {searchResult.map(item => {
               return (
                 <React.Fragment key={item.item.GoogleID}>
-                  <div
-                    className={styles.searchresult}
-                    onClick={() => handleaddpeople(item.item.GoogleID)}
-                  >
+                  <div className={styles.searchresult} onClick={() => handleaddpeople(item.item.GoogleID)}>
                     <Image
                       className={styles.searchresultimage}
                       src={item.item.image}
                       height={50}
                       width={50}
-                      alt="Profile"
-                    ></Image>
-                    <div className={styles.searchresultname}>
-                      {item.item.name}
-                    </div>
+                      alt="Profile"></Image>
+                    <div className={styles.searchresultname}>{item.item.name}</div>
                   </div>
                   <hr className={styles.linebreak} />
                 </React.Fragment>
               );
             })}
-            {searchResult.length === 0 && (
-              <div className={styles.nosearchresult}>No result found</div>
-            )}
+            {searchResult.length === 0 && <div className={styles.nosearchresult}>No result found</div>}
           </div>
         )}
         {!searchTerm && (
           <div className={styles.peoplelistcont}>
-            {totatlpeople.map((item) => {
+            {totatlpeople.map(item => {
               return (
                 <React.Fragment key={item.GoogleID}>
-                  <div
-                    className={styles.peoplelist}
-                    onClick={() => handleaddpeople(item.GoogleID)}
-                  >
+                  <div className={styles.peoplelist} onClick={() => handleaddpeople(item.GoogleID)}>
                     <Image
                       className={styles.peoplelistimage}
                       src={item.image}
                       height={50}
                       width={50}
-                      alt="Profile"
-                    ></Image>
+                      alt="Profile"></Image>
                     <div className={styles.peoplelistname}>{item.name}</div>
                   </div>
                 </React.Fragment>
