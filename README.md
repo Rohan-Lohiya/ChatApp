@@ -9,11 +9,13 @@ A full-stack real-time chat application with support for **single** and **group 
 ## ✨ Features
 
 ### 💬 Chat Functionality
+
 - **Single and Group Chats** with real-time messaging via **Socket.IO**
 - **Enter to Send** toggle
 - **User “About” Info** customization
 
 ### 👥 Group Features
+
 - Group **Admin** roles:
   - Add/remove participants
   - Delete others’ messages
@@ -21,10 +23,12 @@ A full-stack real-time chat application with support for **single** and **group 
   - Change group description
 
 ### 🎨 User Interface
+
 - Simple and intuitive UI
 - **Dark/Light Theme** toggle
 
 ### 🔐 Authentication
+
 - Google Sign-In via **NextAuth.js**
 - Token management using **NextAuth Token**
 
@@ -33,6 +37,7 @@ A full-stack real-time chat application with support for **single** and **group 
 ## ⚙️ Tech Stack
 
 ### Frontend
+
 - **Next.js**
 - **Redux** for state management
 - **Socket.IO** client
@@ -42,6 +47,7 @@ A full-stack real-time chat application with support for **single** and **group 
 - **NextAuth.js** for authentication
 
 ### Backend
+
 - **Node.js** + **Express.js**
 - **Socket.IO** for real-time communication
 - **MongoDB** with **Mongoose**
@@ -53,6 +59,7 @@ A full-stack real-time chat application with support for **single** and **group 
 ## 🛠️ Setup Instructions
 
 ### 1. Clone the repo
+
 ```bash
 git clone https://github.com/Rohan-Lohiya/ChatApp.git
 cd ChatApp
@@ -61,6 +68,7 @@ cd ChatApp
 ### 2. Set up environment variables
 
 #### Frontend (`.env.local`)
+
 ```env
 GOOGLE_ID=your_google_client_id
 GOOGLE_SECRET=your_google_client_secret
@@ -69,20 +77,24 @@ NEXT_PUBLIC_BACKEND_URL=http://localhost:5000
 ```
 
 #### Backend (`.env`)
+
 ```env
 MONGO_URI=your_mongodb_connection_string
 NEXTAUTH_SECRET=same_as_frontend
+FRONTEND_URL=http://localhost:3000
 ```
 
 ### 3. Install dependencies
 
 #### Frontend
+
 ```bash
 cd frontend
 npm install
 ```
 
 #### Backend
+
 ```bash
 cd backend
 npm install
@@ -91,11 +103,13 @@ npm install
 ### 4. Run the app
 
 #### Start Backend
+
 ```bash
 nodemon server.js
 ```
 
 #### Start Frontend
+
 ```bash
 npm run dev
 ```
