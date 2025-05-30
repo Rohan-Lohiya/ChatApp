@@ -94,7 +94,7 @@ const SendMessage = () => {
     if (usergroup) {
       setgroup(usergroup);
     }
-  }, [selectedGoogleID]);
+  }, [selectedGoogleID, groupdata]);
 
   return (
     <div className={styles.sendmessagecont}>

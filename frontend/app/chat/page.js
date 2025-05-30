@@ -22,7 +22,7 @@ import { redirect } from 'next/navigation';
 import { useSocketAndChatData } from '@/components/specific/useSocketAndChatData';
 import axios from 'axios';
 
-const page = () => {
+const Page = () => {
   const selectedGoogleID = useSelector(state => state.selectedUser.googleID);
   const isonline = useSelector(state => state.selectedUser.online);
   const totalPeople = useSelector(state => state.selectedUser.totalPeople);
@@ -426,4 +426,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
