@@ -50,7 +50,7 @@ export default function Home() {
     }, 50); // short delay to force re-mount
 
     return () => clearTimeout(timeout);
-  }, [theme]);
+  }, [theme, mounted]);
 
   return (
     <div className={styles.homeContainer} id="homecont">
