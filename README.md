@@ -1,4 +1,4 @@
-![HomePage](https://github.com/user-attachments/assets/42fb24d7-58ef-4e95-91fa-b4ff856dc164)
+![HomePage](https://github.com/user-attachments/assets/488fa0c0-3365-46d6-ac5a-0b291e0691b9)
 
 # 🗨️ ChatBox
 
@@ -137,7 +137,7 @@ backend/
 
 ## 📸 Screenshots
 
-![About](https://github.com/user-attachments/assets/e91c63fd-e054-43a2-a0f8-be50ee5eca4e)
+![AboutPage](https://github.com/user-attachments/assets/eeeee1d0-8e80-4a3d-bcf1-a2e68cdbaa24)
 ![GroupChat](https://github.com/user-attachments/assets/e4510349-2aa6-4653-ac5a-87fb9f87c551)
 ![SingleChat](https://github.com/user-attachments/assets/d3da0a8c-f083-4895-bb0b-2ffa9c3c1d60)
 
