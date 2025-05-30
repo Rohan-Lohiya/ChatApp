@@ -6,29 +6,32 @@ const connectToDatabase = require("./dbconnection/database");
 const dotenv = require("dotenv");
 const setupSocket = require("./socket/index");
 const { router: apiroute } = require("./controller/apiroute");
-const { router: grouproute} = require("./controller/grouproute"); // ✅ Include setIo
-const {router: chatroute} = require("./controller/chatroute");
+const { router: grouproute } = require("./controller/grouproute"); // ✅ Include setIo
+const { router: chatroute } = require("./controller/chatroute");
 const { setIo } = require("./socket/io");
 
 const app = express();
+const frontendURI = process.env.FRONTEND_URL;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(cors({ 
-  origin: "http://localhost:3000", 
-  methods: ["GET", "POST"],
-  credentials: true 
-}));
+app.use(
+  cors({
+    origin: frontendURI,
+    methods: ["GET", "POST"],
+    credentials: true,
+  })
+);
 
 const httpServer = createServer(app);
 
 const io = new Server(httpServer, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: frontendURI,
     methods: ["GET", "POST"],
-    credentials: true
-  }
+    credentials: true,
+  },
 });
 
 // ✅ Pass io to route
