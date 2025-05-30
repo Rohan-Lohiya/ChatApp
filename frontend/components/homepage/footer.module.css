@@ -1,0 +1,57 @@
+/* Footer.module.css */
+
+.footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 2rem 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    text-align: center;
+    color: #a1a1aa;
+}
+
+/* Responsive padding */
+@media (min-width: 640px) {
+    .container {
+        padding: 0 1.5rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .container {
+        padding: 0 2rem;
+    }
+}
+
+.logoSection {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.icon {
+    height: 1.5rem;
+    width: 1.5rem;
+    color: var(--headingfontcolor);
+    margin-right: 0.5rem;
+}
+
+.brandName {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.copyright {
+    font-size: 0.875rem;
+    margin: 0;
+}
+
+.tagline {
+    font-size: 0.75rem;
+    margin: 0.5rem 0 0 0;
+}

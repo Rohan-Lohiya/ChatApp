@@ -1,90 +1,94 @@
-.container{
+.container {
     height: 100vh;
     width: 100vw;
     display: flex;
     justify-content: center;
     align-items: center;
-}
-.googleLoginbtn{
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    height: 10%;
-    width: 20%;
-    border-radius: 10px;
-    background-color: #BDDDE4;
-    font-weight: bold;
-    font-size: larger;
-    color: rgb(77, 77, 77);
-    box-shadow: 0px 0px 0px 0px teal;
-    transition: box-shadow ease-out 0.5s;
-}
-.googleLoginbtn:hover{
-    box-shadow: 0px 0px 19px 7px teal;
-    transition: box-shadow ease-out 0.5s;
+    background: var(--gradientback);
+    flex-direction: column;
+    gap: 30px;
+    padding: 20px;
 }
 
-.signoutcontainer{
+.googleLoginbtn {
     display: flex;
-    justify-content: center;
-    align-content: center;
-    width: auto;
-    height: 6%;
+    align-items: center;
+    gap: 15px;
+    padding: 12px 24px;
+    border-radius: 12px;
+    background-color: #ffffff;
+    color: #333;
+    font-weight: bold;
+    font-size: 18px;
+    cursor: pointer;
+    box-shadow: 0px 5px 15px rgba(0, 128, 128, 0.3);
+    transition: all 0.3s ease;
+}
+
+.googleLoginbtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0px 10px 25px rgba(0, 128, 128, 0.5);
+}
+
+.signoutcontainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     gap: 20px;
 }
 
-.welcome{
+.welcome {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.profilePic {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 0 10px rgba(0, 128, 128, 0.3);
+}
+
+.signoutbutton,
+.homepagebutton {
+    padding: 10px 20px;
+    border-radius: 10px;
+    background-color: #ffffff;
+    font-weight: bold;
+    font-size: 16px;
+    color: rgb(77, 77, 77);
+    box-shadow: 0px 4px 12px rgba(0, 128, 128, 0.2);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.signoutbutton:hover,
+.homepagebutton:hover {
+    box-shadow: 0px 8px 20px rgba(0, 128, 128, 0.4);
+    transform: translateY(-2px);
+}
+
+.homepagebutton {
     display: flex;
     justify-content: center;
     align-items: center;
-    text-align: center;
 }
 
-.signoutbutton{
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    height: 100%;
-    width: auto;
-    border-radius: 10px;
-    background-color: #BDDDE4;
-    font-weight: bold;
-    font-size: larger;
-    color: rgb(77, 77, 77);
-    box-shadow: 0px 0px 0px 0px teal;
-    transition: box-shadow ease-out 0.5s;
-    outline: none;
-    border: none;
-}
-.signoutbutton:hover{
-    box-shadow: 0px 0px 19px 4px teal;
-    transition: box-shadow ease-out 0.5s;
-}
+@media (max-width: 600px) {
+    .googleLoginbtn {
+        width: 80%;
+        font-size: 16px;
+    }
 
-.homepagebutton{
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    height:100%;
-    width: auto;
-    border-radius: 10px;
-    background-color: #BDDDE4;
-    font-weight: bold;
-    font-size: large;
-    color: rgb(77, 77, 77);
-    box-shadow: 0px 0px 0px 0px teal;
-    transition: box-shadow ease-out 0.5s;
-    outline: none;
-    border: none;
-    text-decoration: none;
-    padding-left: 5px;
-    padding-right: 5px;
-}
-.homepagebutton:hover{
-    box-shadow: 0px 0px 19px 4px teal;
-    transition: box-shadow ease-out 0.5s;
-}
+    .signoutcontainer {
+        gap: 15px;
+    }
 
-.link{
-    width: auto;
+    .welcome {
+        font-size: 20px;
+        text-align: center;
+    }
 }

@@ -1,0 +1,73 @@
+.aboutsection {
+    height: auto;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 60px;
+}
+
+.aboutheading {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.aboutheading1 {
+    font-size: 40px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.aboutheading2 {
+    font-size: 40px;
+    color: var(--headingfontcolor);
+    font-weight: bold;
+}
+
+.aboutheadingtext {
+    font-size: large;
+    color: var(--basicfontcolorlight);
+    max-width: 700px;
+    text-align: center;
+}
+
+.cardcomp {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    margin-top: 60px;
+}
+
+.card {
+    height: 200px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    box-shadow: var(--newshadow);
+    background-color: var(--scrollbartrackcolor);
+    transform: scale(1);
+    transform: translateY(2%);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: scale(1.01);
+    box-shadow: var(--newshadowhover);
+}
+
+.icon {
+    color: var(--headingfontcolor);
+    height: 40px;
+    width: 40px;
+}
+
+.cardtext {
+    text-align: center;
+    color: var(--basicfontcolorlight);
+}

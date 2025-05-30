@@ -9,7 +9,6 @@ const { getIo } = require("../socket/io");
 
 // Import io properly - make sure your server exports it correctly
 
-
 router.post("/creategroup", async (req, res) => {
   const io = getIo();
   console.log("create group occurs");
@@ -54,15 +53,27 @@ router.post("/creategroup", async (req, res) => {
       ...newGroup,
       groupMessages: [],
     });
+    const senderGoogleID = formattedAdmins[0]?.GoogleID;
+
+    const message = {
+      from: senderGoogleID,
+      groupID,
+      text: `${senderGoogleID} Created group`,
+      timestamp: new Date(),
+      delivered: false,
+      deliveredTo: [],
+      readBy: [],
+      read: false,
+      messagetype: "notification",
+    };
+    groupdata.groupMessages.push(message);
 
     await groupdata.save();
 
     for (const member of members) {
       const user = await Chatdata.findOne({ myGoogleID: member.GoogleID });
       if (!user) {
-        return res
-          .status(404)
-          .json({ message: `User with GoogleID ${member.GoogleID} not found` });
+        return res.status(404).json({ message: `User with GoogleID ${member.GoogleID} not found` });
       }
       user.totalgroup.push(newgroupforuser);
       await user.save();
@@ -79,23 +90,21 @@ router.post("/creategroup", async (req, res) => {
         }
       }
     }
-    if(io){
+    if (io) {
       io.to(groupID).emit("newgroupjoined", groupdata);
     }
 
-    res
-      .status(201)
-      .json({ message: "Group created successfully", group: newGroup });
+    res.status(201).json({ message: "Group created successfully", group: newGroup });
   } catch (error) {
     console.error("Error creating group:", error);
     res.status(500).json({ message: "Internal server error" });
   }
 });
 
-router.post("/add-member",authenticateToken, async (req, res) => {
+router.post("/add-member", authenticateToken, async (req, res) => {
   const io = getIo();
   console.log("add member occured");
-  const { groupID, members} = req.body;
+  const { groupID, members } = req.body;
   const senderGoogleID = req.user.email;
   try {
     if (!groupID || !members || !senderGoogleID) {
@@ -104,10 +113,7 @@ router.post("/add-member",authenticateToken, async (req, res) => {
       });
     }
     const groupdata = await Groupdata.findOne({ groupID: groupID });
-    if (
-      !groupdata ||
-      !groupdata.groupAdmin.some((admin) => admin.GoogleID === senderGoogleID)
-    ) {
+    if (!groupdata || !groupdata.groupAdmin.some((admin) => admin.GoogleID === senderGoogleID)) {
       return res.status(403).json({
         message: "You are not authorized to add members to this group",
       });
@@ -124,9 +130,7 @@ router.post("/add-member",authenticateToken, async (req, res) => {
     const message = {
       from: senderGoogleID,
       groupID: groupID,
-      text: `${senderGoogleID} added ${members
-        .map((member) => member.GoogleID)
-        .join(", ")} to the group`,
+      text: `${senderGoogleID} added ${members.map((member) => member.GoogleID).join(", ")} to the group`,
       timestamp: new Date(),
       delivered: false,
       deliveredTo: [],
@@ -135,9 +139,7 @@ router.post("/add-member",authenticateToken, async (req, res) => {
       messagetype: "notification",
     };
     for (const member of formattedMembers) {
-      const existingMember = groupdata.members.find(
-        (m) => m.GoogleID === member.GoogleID
-      );
+      const existingMember = groupdata.members.find((m) => m.GoogleID === member.GoogleID);
 
       if (!existingMember) {
         // New member — push to members array
@@ -193,7 +195,7 @@ router.post("/add-member",authenticateToken, async (req, res) => {
   }
 });
 
-router.post("/remove-member",authenticateToken, async (req, res) => {
+router.post("/remove-member", authenticateToken, async (req, res) => {
   const io = getIo();
   const { groupID, member } = req.body;
   const senderGoogleID = req.user.email;
@@ -204,10 +206,7 @@ router.post("/remove-member",authenticateToken, async (req, res) => {
       });
     }
     const groupdata = await Groupdata.findOne({ groupID: groupID });
-    if (
-      !groupdata ||
-      !groupdata.groupAdmin.some((admin) => admin.GoogleID === senderGoogleID)
-    ) {
+    if (!groupdata || !groupdata.groupAdmin.some((admin) => admin.GoogleID === senderGoogleID)) {
       return res.status(403).json({
         message: "You are not authorized to remove members from this group",
       });
@@ -222,15 +221,11 @@ router.post("/remove-member",authenticateToken, async (req, res) => {
     }
 
     // Update the removed user's group membership
-    removeduser.totalgroup = removeduser.totalgroup.filter(
-      (group) => group.groupID !== groupID
-    );
+    removeduser.totalgroup = removeduser.totalgroup.filter((group) => group.groupID !== groupID);
     await removeduser.save();
 
     // Mark member as not present instead of removing
-    const memberToUpdate = groupdata.members.find(
-      (user) => user.GoogleID === member
-    );
+    const memberToUpdate = groupdata.members.find((user) => user.GoogleID === member);
 
     if (memberToUpdate) {
       memberToUpdate.present = false;
@@ -241,9 +236,7 @@ router.post("/remove-member",authenticateToken, async (req, res) => {
       const user = await Chatdata.findOne({ myGoogleID: person.GoogleID });
       if (user) {
         // Find and update the specific group in user's totalgroup
-        const groupIndex = user.totalgroup.findIndex(
-          (group) => group.groupID === groupID
-        );
+        const groupIndex = user.totalgroup.findIndex((group) => group.groupID === groupID);
         if (groupIndex !== -1) {
           user.totalgroup[groupIndex].members = groupdata.members;
           await user.save();
@@ -291,7 +284,7 @@ router.post("/remove-member",authenticateToken, async (req, res) => {
   }
 });
 
-router.post("/addadmin",authenticateToken, async (req, res) => {
+router.post("/addadmin", authenticateToken, async (req, res) => {
   const io = getIo();
   const { groupID, newAdmin } = req.body;
   const senderGoogleID = req.user.email;
@@ -302,10 +295,7 @@ router.post("/addadmin",authenticateToken, async (req, res) => {
       });
     }
     const groupdata = await Groupdata.findOne({ groupID: groupID });
-    if (
-      !groupdata ||
-      !groupdata.groupAdmin.some((admin) => admin.GoogleID === senderGoogleID)
-    ) {
+    if (!groupdata || !groupdata.groupAdmin.some((admin) => admin.GoogleID === senderGoogleID)) {
       return res.status(403).json({
         message: "You are not authorized to change admin of this group",
       });
@@ -373,10 +363,7 @@ router.delete("/deletegroup", async (req, res) => {
       });
     }
     const groupdata = await Groupdata.findOne({ groupID: groupID });
-    if (
-      !groupdata ||
-      !groupdata.groupAdmin.some((admin) => admin.GoogleID === senderGoogleID)
-    ) {
+    if (!groupdata || !groupdata.groupAdmin.some((admin) => admin.GoogleID === senderGoogleID)) {
       return res.status(403).json({
         message: "You are not authorized to delete this group",
       });
@@ -390,9 +377,7 @@ router.delete("/deletegroup", async (req, res) => {
     for (const member of members) {
       const user = await Chatdata.findOne({ myGoogleID: member.GoogleID });
       if (user) {
-        user.totalgroup = user.totalgroup.filter(
-          (group) => group.groupID !== groupID
-        );
+        user.totalgroup = user.totalgroup.filter((group) => group.groupID !== groupID);
         await user.save();
       }
     }
@@ -432,9 +417,7 @@ router.post("/leavegroup", authenticateToken, async (req, res) => {
       });
     }
 
-    removeduser.totalgroup = removeduser.totalgroup.filter(
-      (group) => group.groupID !== groupID
-    );
+    removeduser.totalgroup = removeduser.totalgroup.filter((group) => group.groupID !== groupID);
     await removeduser.save();
 
     const group = await Groupdata.findOne({ groupID: groupID });
@@ -442,19 +425,13 @@ router.post("/leavegroup", authenticateToken, async (req, res) => {
       return res.status(404).json({ error: "Group not found" });
     }
 
-    const isSenderAdmin = group.groupAdmin.some(
-      (user) => user.GoogleID === senderGoogleID
-    );
+    const isSenderAdmin = group.groupAdmin.some((user) => user.GoogleID === senderGoogleID);
     const activeMemberCount = group.members.filter((m) => m.present).length;
 
     let newAdminID = "";
 
     // Case 1: Sender is only admin, multiple members exist
-    if (
-      isSenderAdmin &&
-      activeMemberCount > 1 &&
-      group.groupAdmin.length === 1
-    ) {
+    if (isSenderAdmin && activeMemberCount > 1 && group.groupAdmin.length === 1) {
       const presentMembers = group.members.filter(
         (member) =>
           member.GoogleID !== senderGoogleID &&
@@ -470,9 +447,7 @@ router.post("/leavegroup", authenticateToken, async (req, res) => {
       }
 
       // Remove the leaving admin
-      group.groupAdmin = group.groupAdmin.filter(
-        (admin) => admin.GoogleID !== senderGoogleID
-      );
+      group.groupAdmin = group.groupAdmin.filter((admin) => admin.GoogleID !== senderGoogleID);
     }
 
     // Case 2: Only one member left (sender), delete group
@@ -485,15 +460,11 @@ router.post("/leavegroup", authenticateToken, async (req, res) => {
         });
       }
 
-      return res
-        .status(200)
-        .json({ message: "Group deleted as it has no members left." });
+      return res.status(200).json({ message: "Group deleted as it has no members left." });
     }
 
     // Mark the sender as not present
-    const leavingMember = group.members.find(
-      (user) => user.GoogleID === senderGoogleID
-    );
+    const leavingMember = group.members.find((user) => user.GoogleID === senderGoogleID);
     if (leavingMember) {
       leavingMember.present = false;
     }
@@ -502,9 +473,7 @@ router.post("/leavegroup", authenticateToken, async (req, res) => {
     for (const person of group.members) {
       const user = await Chatdata.findOne({ myGoogleID: person.GoogleID });
       if (user) {
-        const groupIndex = user.totalgroup.findIndex(
-          (g) => g.groupID === groupID
-        );
+        const groupIndex = user.totalgroup.findIndex((g) => g.groupID === groupID);
         if (groupIndex !== -1) {
           user.totalgroup[groupIndex].members = group.members;
           await user.save();
@@ -586,10 +555,7 @@ router.post("/changedescription", authenticateToken, async (req, res) => {
       });
     }
     const groupdata = await Groupdata.findOne({ groupID: groupID });
-    if (
-      !groupdata ||
-      !groupdata.groupAdmin.some((admin) => admin.GoogleID === senderGoogleID)
-    ) {
+    if (!groupdata || !groupdata.groupAdmin.some((admin) => admin.GoogleID === senderGoogleID)) {
       return res.status(403).json({
         message: "You are not authorized to change admin of this group",
       });
@@ -608,7 +574,7 @@ router.post("/changedescription", authenticateToken, async (req, res) => {
     };
     groupdata.groupMessages.push(message);
     await groupdata.save();
-    if(io){
+    if (io) {
       io.to(groupID).emit("recieve-groupmessage", message);
       io.to(groupID).emit("group-description-changed", {
         groupID: groupID,
@@ -619,10 +585,10 @@ router.post("/changedescription", authenticateToken, async (req, res) => {
       message: "Group description changed successfully",
       description: description,
     });
-  } catch (error){
+  } catch (error) {
     console.error("Error changing group description:", error);
     res.status(500).json({ message: "Internal server error" });
-   }
+  }
 });
 // Export both the router and the setIo function
 module.exports = { router };

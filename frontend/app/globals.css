@@ -20,20 +20,22 @@
 }
 
 
+html {
+  scroll-behavior: smooth;
+}
 
-body{
+body {
   margin: 0px;
   padding: 0px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  background-color: var(--background);
+  color: var(--basicfontcolor);
+  font-family: 'Ubuntu', sans-serif;
   height: 100vh;
   width: 100vw;
-  background-color: var(--absoutebackground);
-  color: var(--basicfontcolor);
   overflow: hidden;
-  font-family: 'Ubuntu', sans-serif;
+
 }
+
 :root {
   --background: white;
   --foreground: black;
@@ -54,14 +56,16 @@ body{
   --chatdatecolor: rgb(95, 95, 95);
   --shadow: 0 0 12px 1px #5454546f;
   --whitescreen: rgba(255, 255, 255, 0.753);
-
+  --newshadow: 0px 8px 17px 0px #1a1a1a57;
+  --newshadowhover: 0px 8px 17px 2px #1a1a1a81;
+  --gradientback: linear-gradient(135deg, #e0f7fa, #ffffff);
 }
 
 html[data-theme='dark'] {
   --background: #111B21;
   --foreground: white;
   --absoutebackground: #1e1d1c;
-  
+
   --basicfontcolor: rgb(255, 255, 255);
   --basicfontcolorlight: rgb(221, 221, 221);
   --headingfontcolor: #3ac4ff;
@@ -78,4 +82,8 @@ html[data-theme='dark'] {
   --chatdatecolor: rgb(177, 177, 177);
   --shadow: 0 0 12px 1px #1a1a1a;
   --whitescreen: rgba(44, 44, 44, 0.753);
+  --newshadow: 0px 2px 13px 4px #3ac4ff28;
+  --newshadowhover: 0px 2px 13px 6px #3ac4ff3d;
+  --gradientback: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+
 }

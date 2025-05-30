@@ -235,188 +235,190 @@ const page = () => {
           </div>
         </div>
       )}
-      <div className={styles.container}>
-        <div className={styles.first}>
-          <div
-            onClick={() => handlesetfirstdivselected('1')}
-            className={`${styles.iconWrapper} ${firstdivselected === '1' ? styles.selected : ''}`}>
-            <Image
-              className={styles.chatselect}
-              src={firstdivselected === '1' ? '/chatselect.png' : '/chatnotselect.png'}
-              width={40}
-              height={40}
-              alt="chat"
-            />
-          </div>
+      <div className={styles.backgroundcont}>
+        <div className={styles.container}>
+          <div className={styles.first}>
+            <div
+              onClick={() => handlesetfirstdivselected('1')}
+              className={`${styles.iconWrapper} ${firstdivselected === '1' ? styles.selected : ''}`}>
+              <Image
+                className={styles.chatselect}
+                src={firstdivselected === '1' ? '/chatselect.png' : '/chatnotselect.png'}
+                width={40}
+                height={40}
+                alt="chat"
+              />
+            </div>
 
-          <div
-            onClick={() => handlesetfirstdivselected('2')}
-            className={`${styles.iconWrapper} ${firstdivselected === '2' ? styles.selected : ''}`}>
-            <Image
-              className={styles.settingselect}
-              src={firstdivselected === '2' ? '/settingselected.png' : '/settingsnotselected.png'}
-              width={40}
-              height={40}
-              alt="setting"
-            />
-          </div>
+            <div
+              onClick={() => handlesetfirstdivselected('2')}
+              className={`${styles.iconWrapper} ${firstdivselected === '2' ? styles.selected : ''}`}>
+              <Image
+                className={styles.settingselect}
+                src={firstdivselected === '2' ? '/settingselected.png' : '/settingsnotselected.png'}
+                width={40}
+                height={40}
+                alt="setting"
+              />
+            </div>
 
-          <div
-            onClick={() => handlesetfirstdivselected('3')}
-            className={`${styles.iconWrapper} ${firstdivselected === '3' ? styles.selected : ''} ${
-              styles.avtarselectcont
-            }`}>
-            <Image className={styles.avtarselect} src={session.user.image} width={40} height={40} alt="avtar" />
+            <div
+              onClick={() => handlesetfirstdivselected('3')}
+              className={`${styles.iconWrapper} ${firstdivselected === '3' ? styles.selected : ''} ${
+                styles.avtarselectcont
+              }`}>
+              <Image className={styles.avtarselect} src={session.user.image} width={40} height={40} alt="avtar" />
+            </div>
           </div>
-        </div>
-        <hr className={styles.break} />
-        <div className={styles.second}>
-          <div className={styles.secondheading}>
-            <span className={styles.secondheadingheading}>
-              {firstdivselected === '1' ? 'Chats' : firstdivselected === '2' ? 'Settings' : 'Profile'}
-            </span>
-            {firstdivselected === '1' && (
-              <span className={styles.imagecont}>
-                <span className={styles.addchatimgcont}>
-                  <Image
-                    onClick={() => setaddchatpressed(true)}
-                    className={styles.optImage}
-                    src={'/addchat.png'}
-                    width={25}
-                    height={25}
-                    alt="AddChat"></Image>
-                  {addchatpressed && (
-                    <span ref={addchatref} className={styles.addchatcont}>
-                      <AddChat />
-                    </span>
-                  )}
-                </span>
-                <span className={styles.addgroupimgcont}>
-                  <Image
-                    onClick={() => setaddgrouppressed(!addgrouppressed)}
-                    className={styles.optImage}
-                    src={'/group.png'}
-                    width={40}
-                    height={40}
-                    alt="Group"></Image>
-                  <div
-                    className={`${styles.whitescreennew} ${
-                      addgrouppressed ? styles.showwhitescreennew : styles.hidewhitescreennew
-                    }`}>
-                    <span
-                      ref={addgroupref}
-                      className={`${styles.addgroupcont} ${
-                        addgrouppressed ? styles.addgroupshow : styles.addgrouphide
-                      }`}>
-                      <AddGroup setaddgrouppressed={setaddgrouppressed} />
-                    </span>
-                  </div>
-                </span>
+          <hr className={styles.break} />
+          <div className={styles.second}>
+            <div className={styles.secondheading}>
+              <span className={styles.secondheadingheading}>
+                {firstdivselected === '1' ? 'Chats' : firstdivselected === '2' ? 'Settings' : 'Profile'}
               </span>
-            )}
-          </div>
-          {firstdivselected === '1' && (
-            <>
-              <div className={styles.searchCont}>
-                <Searchinput />
-              </div>
-              <div className={styles.chatlistcont}>
-                <ChatList />
-              </div>
-            </>
-          )}
-          {firstdivselected === '2' && (
-            <div className={styles.settingspagecont}>
-              <Settings />
-            </div>
-          )}
-          {firstdivselected === '3' && (
-            <div className={styles.profilepagecont}>
-              <Profile />
-            </div>
-          )}
-        </div>
-        <hr className={styles.break} />
-        <div className={`${styles.third} ${showAbout ? styles.showAbout : ''}`}>
-          <div className={styles.thirdchatselectcont}>
-            {!isselectedGID && (
-              <div className={styles.flexcentercenter}>
-                <h1>Welcome</h1>
-                <div>Select chat to start</div>
-              </div>
-            )}
-            {isselectedGID && (
-              <>
-                <div className={styles.thirdheading}>
-                  <span className={styles.selectedchatinfocont} onClick={() => setShowAbout(!showAbout)}>
+              {firstdivselected === '1' && (
+                <span className={styles.imagecont}>
+                  <span className={styles.addchatimgcont}>
                     <Image
-                      className={styles.selectedavtarimage}
-                      src={selectedavtar(selectedGoogleID)}
+                      onClick={() => setaddchatpressed(true)}
+                      className={styles.optImage}
+                      src={'/addchat.png'}
+                      width={25}
+                      height={25}
+                      alt="AddChat"></Image>
+                    {addchatpressed && (
+                      <span ref={addchatref} className={styles.addchatcont}>
+                        <AddChat />
+                      </span>
+                    )}
+                  </span>
+                  <span className={styles.addgroupimgcont}>
+                    <Image
+                      onClick={() => setaddgrouppressed(!addgrouppressed)}
+                      className={styles.optImage}
+                      src={'/group.png'}
                       width={40}
                       height={40}
                       alt="Group"></Image>
-                    <span className={styles.selectedavtarinfo}>
-                      <span className={styles.selectedavtarname}>{selectedName(selectedGoogleID)}</span>
-                      <span className={styles.isofflinespan}>
-                        {isUserOnline ? 'Online' : selectedGoogleID ? 'Offline' : 'Unknown'}
+                    <div
+                      className={`${styles.whitescreennew} ${
+                        addgrouppressed ? styles.showwhitescreennew : styles.hidewhitescreennew
+                      }`}>
+                      <span
+                        ref={addgroupref}
+                        className={`${styles.addgroupcont} ${
+                          addgrouppressed ? styles.addgroupshow : styles.addgrouphide
+                        }`}>
+                        <AddGroup setaddgrouppressed={setaddgrouppressed} />
                       </span>
-                    </span>
+                    </div>
                   </span>
-                  <span className={styles.dropdownWrapper}>
-                    <Image
-                      ref={imageRef}
-                      onClick={handlemoreheadingoption}
-                      className={styles.moreoptimage}
-                      src={'/more.png'}
-                      width={40}
-                      height={40}
-                      alt="MoreOption"></Image>
-                    {menuVisible && (
-                      <div ref={menuRef} className={styles.moreoptioncont}>
-                        <div onClick={handleclosechat} className={styles.moreoptionsinnercont}>
-                          <div className={styles.moreoptions}>Close Chat</div>
-                        </div>
-                        {!isgroupselected && (
-                          <>
-                            <div
-                              onClick={() => {
-                                setclearchatpressed(true);
-                                setMenuVisible(false);
-                              }}
-                              className={styles.moreoptionsinnercont}>
-                              <div className={styles.moreoptions}>Clear Chat</div>
-                            </div>
-                            <div
-                              onClick={() => {
-                                setdeletechatpressed(true);
-                                setMenuVisible(false);
-                              }}
-                              className={styles.moreoptionsinnercont}>
-                              <div className={styles.moreoptions}>Delete Chat</div>
-                            </div>
-                          </>
-                        )}
-                      </div>
-                    )}
-                  </span>
+                </span>
+              )}
+            </div>
+            {firstdivselected === '1' && (
+              <>
+                <div className={styles.searchCont}>
+                  <Searchinput />
                 </div>
-                {!isgroupselected ? (
-                  <div className={styles.selectedchatcont}>
-                    <SelectedChats GoogleID={selectedGoogleID} />
-                  </div>
-                ) : (
-                  <div className={styles.selectedchatcont}>
-                    <SelectedGroupChats />
-                  </div>
-                )}
-                <div className={styles.sendmessagecont}>
-                  <SendMessage />
+                <div className={styles.chatlistcont}>
+                  <ChatList />
                 </div>
               </>
             )}
+            {firstdivselected === '2' && (
+              <div className={styles.settingspagecont}>
+                <Settings />
+              </div>
+            )}
+            {firstdivselected === '3' && (
+              <div className={styles.profilepagecont}>
+                <Profile />
+              </div>
+            )}
           </div>
-          <div className={`${styles.selectedchataboutcont} ${showAbout ? styles.show : ''}`}>
-            <SelectedChatsInfo setShowAbout={setShowAbout} setdeletechatpressed={setdeletechatpressed} />
+          <hr className={styles.break} />
+          <div className={`${styles.third} ${showAbout ? styles.showAbout : ''}`}>
+            <div className={styles.thirdchatselectcont}>
+              {!isselectedGID && (
+                <div className={styles.flexcentercenter}>
+                  <h1>Welcome</h1>
+                  <div>Select chat to start</div>
+                </div>
+              )}
+              {isselectedGID && (
+                <>
+                  <div className={styles.thirdheading}>
+                    <span className={styles.selectedchatinfocont} onClick={() => setShowAbout(!showAbout)}>
+                      <Image
+                        className={styles.selectedavtarimage}
+                        src={selectedavtar(selectedGoogleID)}
+                        width={40}
+                        height={40}
+                        alt="Group"></Image>
+                      <span className={styles.selectedavtarinfo}>
+                        <span className={styles.selectedavtarname}>{selectedName(selectedGoogleID)}</span>
+                        <span className={styles.isofflinespan}>
+                          {isUserOnline ? 'Online' : selectedGoogleID ? 'Offline' : 'Unknown'}
+                        </span>
+                      </span>
+                    </span>
+                    <span className={styles.dropdownWrapper}>
+                      <Image
+                        ref={imageRef}
+                        onClick={handlemoreheadingoption}
+                        className={styles.moreoptimage}
+                        src={'/more.png'}
+                        width={40}
+                        height={40}
+                        alt="MoreOption"></Image>
+                      {menuVisible && (
+                        <div ref={menuRef} className={styles.moreoptioncont}>
+                          <div onClick={handleclosechat} className={styles.moreoptionsinnercont}>
+                            <div className={styles.moreoptions}>Close Chat</div>
+                          </div>
+                          {!isgroupselected && (
+                            <>
+                              <div
+                                onClick={() => {
+                                  setclearchatpressed(true);
+                                  setMenuVisible(false);
+                                }}
+                                className={styles.moreoptionsinnercont}>
+                                <div className={styles.moreoptions}>Clear Chat</div>
+                              </div>
+                              <div
+                                onClick={() => {
+                                  setdeletechatpressed(true);
+                                  setMenuVisible(false);
+                                }}
+                                className={styles.moreoptionsinnercont}>
+                                <div className={styles.moreoptions}>Delete Chat</div>
+                              </div>
+                            </>
+                          )}
+                        </div>
+                      )}
+                    </span>
+                  </div>
+                  {!isgroupselected ? (
+                    <div className={styles.selectedchatcont}>
+                      <SelectedChats GoogleID={selectedGoogleID} />
+                    </div>
+                  ) : (
+                    <div className={styles.selectedchatcont}>
+                      <SelectedGroupChats />
+                    </div>
+                  )}
+                  <div className={styles.sendmessagecont}>
+                    <SendMessage />
+                  </div>
+                </>
+              )}
+            </div>
+            <div className={`${styles.selectedchataboutcont} ${showAbout ? styles.show : ''}`}>
+              <SelectedChatsInfo setShowAbout={setShowAbout} setdeletechatpressed={setdeletechatpressed} />
+            </div>
           </div>
         </div>
       </div>
